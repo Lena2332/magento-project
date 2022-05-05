@@ -4,6 +4,7 @@
 /.project
 /.settings
 /.vscode
+/auth.json
 atlassian*
 /nbproject
 /robots.txt
@@ -70,3 +71,6 @@ atlassian*
 /generated/*
 !/generated/.htaccess
 .DS_Store
+!/var/log/
+/var/log/*
+!/var/log/.gitkeep
