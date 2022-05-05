@@ -5,6 +5,7 @@
 /.settings
 /.vscode
 atlassian*
+/auth.json
 /nbproject
 /robots.txt
 /pub/robots.txt
@@ -15,8 +16,6 @@ atlassian*
 /.idea
 /.gitattributes
 /app/config_sandbox
-/app/etc/config.php
-/app/etc/env.php
 /app/code/Magento/TestModule*
 /lib/internal/flex/uploader/.actionScriptProperties
 /lib/internal/flex/uploader/.flexProperties
@@ -65,6 +64,7 @@ atlassian*
 
 /var/*
 !/var/.htaccess
+!/var/db.sql.gz
 /vendor/*
 !/vendor/.htaccess
 /generated/*
