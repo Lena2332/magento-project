@@ -1,5 +1,5 @@
 # SSL certificates for development
-# $ mkcert -cert-file=olena-kupriiets-magento.local+1.pem -key-file=olena-kupriiets-magento.local+1-key.pem olena-kupriiets-magento.local www.olena-kupriiets-magento.local
+# $ mkcert -cert-file=olena-kupriiets-magento.local+3.pem -key-file=olena-kupriiets-magento.local+3-key.pem olena-kupriiets-magento.local www.olena-kupriiets-magento.local olena-kupriiets-magento.us www.olena-kupriiets.us
 #
 # Start composition:
 # $ docker-compose up -d
@@ -27,13 +27,13 @@ services:
     labels:
       - traefik.enable=true
       # HTTP
-      - traefik.http.routers.olena-kupriiets-magento-local-http.rule=Host(`olena-kupriiets-magento.local`,`www.olena-kupriiets-magento.local`)
+      - traefik.http.routers.olena-kupriiets-magento-local-http.rule=Host(`olena-kupriiets-magento.local`,`www.olena-kupriiets-magento.local`,`olena-kupriiets-magento.us`,`www.olena-kupriiets.us`)
       - traefik.http.routers.olena-kupriiets-magento-local-http.entrypoints=http
       - traefik.http.routers.olena-kupriiets-magento-local-http.service=olena-kupriiets-magento-local-http
       - traefik.http.services.olena-kupriiets-magento-local-http.loadbalancer.server.port=80
       - traefik.http.services.olena-kupriiets-magento-local-http.loadbalancer.server.scheme=http
       # HTTPS
-      - traefik.http.routers.olena-kupriiets-magento-local-https.rule=Host(`olena-kupriiets-magento.local`,`www.olena-kupriiets-magento.local`)
+      - traefik.http.routers.olena-kupriiets-magento-local-https.rule=Host(`olena-kupriiets-magento.local`,`www.olena-kupriiets-magento.local`,`olena-kupriiets-magento.us`,`www.olena-kupriiets.us`)
       - traefik.http.routers.olena-kupriiets-magento-local-https.entrypoints=https
       - traefik.http.routers.olena-kupriiets-magento-local-https.tls=true
       - traefik.http.routers.olena-kupriiets-magento-local-https.service=olena-kupriiets-magento-local-https
@@ -41,7 +41,7 @@ services:
       - traefik.http.services.olena-kupriiets-magento-local-https.loadbalancer.server.scheme=https
     # Must add extra_hosts to be written to /etc/hosts - otherwise containerized application can not curl itself
     extra_hosts:
-      - "olena-kupriiets-magento.local www.olena-kupriiets-magento.local:127.0.0.1"
+      - "olena-kupriiets-magento.local www.olena-kupriiets-magento.local olena-kupriiets-magento.us www.olena-kupriiets.us:127.0.0.1"
       # Required for xDebug on Linux hosts till docker.host.internal is not available by default - https://github.com/docker/libnetwork/pull/2348/files
       - "host.docker.internal:172.17.0.1"
     links:
