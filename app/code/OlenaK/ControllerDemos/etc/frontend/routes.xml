@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
+>
+    <router id="standard">
+        <route id="olenak_controllerdemos" frontName="olenak-controller-demos">
+            <module name="OlenaK_ControllerDemos" />
+        </route>
+    </router>
+</config>
+
+<!--
+ url = https://olena-kupriiets-magento.local/olenak-controller-demos/lesson/rawresponsedemo
+-->
