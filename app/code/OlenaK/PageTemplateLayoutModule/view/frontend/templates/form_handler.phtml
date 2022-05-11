@@ -1,0 +1,8 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<h1>Show parameters from PageResponse</h1>
+<p><strong>"vendor_name" value:</strong> <?= (string) $block->getRequest()->getParam('vendor_name') ?></p>
+<p><strong>"module_name" value:</strong> <?= (string) $block->getRequest()->getParam('module_name') ?></p>
+<br>
+<p><a href="<?= $block->getUrl('olenak_page_tpl/lesson/pageresponsedemo') ?>">Return to form</a></p>

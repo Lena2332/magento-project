@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="2columns-right"
+>
+    <body>
+        <referenceContainer name="content">
+            <container name="olenak.page.template.layout.container" htmlTag="div" htmlClass="olenak-page-template-layout">
+                <block name="olenak.page.template.layout.text.block"
+                       class="Magento\Framework\View\Element\Text"
+                       before="-"
+                >
+                    <arguments>
+                        <argument name="text" translate="true" xsi:type="string"><![CDATA[{OlenaK} Text block demo]]></argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Template"
+                       name="olenak.page.template.layout.text.block.with.template"
+                       template="OlenaK_PageTemplateLayoutModule::form_handler.phtml"
+                />
+            </container>
+        </referenceContainer>
+    </body>
+</page>
