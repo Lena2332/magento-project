@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+    <event name="layout_generate_blocks_after">
+        <observer name="olenak_page_tpl_dump_merged_layout_and_handles"
+                  instance="OlenaK\PageTemplateLayoutModule\Observer\DumpMergedLayoutAndHandles"
+        />
+    </event>
+</config>

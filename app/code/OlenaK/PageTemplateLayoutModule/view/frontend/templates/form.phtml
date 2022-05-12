@@ -1,0 +1,26 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<h1>Page Template Layout Module</h1>
+<h3>Page Response</h3>
+<div>
+    <form method="get" action="<?= $block->getUrl('olenak_page_tpl/lesson/formhandlerpage') ?>">
+        <label>
+            <input type="text" name="vendor_name" placeholder="Put your vendor name">
+        </label>
+        <br><br>
+        <label>
+            <input type="text" name="module_name" placeholder="Put your module name">
+        </label>
+        <br><br>
+        <button type="submit">Send</button>
+    </form>
+</div>
+<h3>Test Redirect Response</h3>
+<div>
+    <a href="<?= $block->getUrl('olenak_controllerdemos/lesson/redirectresponsedemo') ?>" target="_blank">Go to my github</a>
+</div>
+<h3>Test Forward Response</h3>
+<div>
+    <a href="<?= $block->getUrl('olenak_controllerdemos/lesson/forwardresponsedemo', ['vendor_name' => 'OlenaK', 'module_name' => 'Page template layout module']) ?>" target="_blank">Go to Json response</a>
+</div>

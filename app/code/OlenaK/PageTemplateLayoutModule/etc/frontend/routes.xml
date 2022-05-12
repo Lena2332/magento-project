@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
+>
+    <router id="standard">
+        <route id="olenak_page_tpl" frontName="olenak-page-tpl">
+            <module name="OlenaK_PageTemplateLayoutModule" />
+        </route>
+    </router>
+</config>
+
+<!--
+  url = https://olena-kupriiets-magento.local/olenak-page-tpl/lesson/pageresponsedemo
+-->

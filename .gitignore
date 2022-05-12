@@ -34,6 +34,7 @@ atlassian*
 /grunt-config.json
 /pub/media/*.*
 !/pub/media/.htaccess
+!/pub/media/styles.css
 /pub/media/attribute/*
 !/pub/media/attribute/.htaccess
 /pub/media/analytics/*
@@ -46,13 +47,13 @@ atlassian*
 /pub/media/favicon/*
 /pub/media/import/*
 !/pub/media/import/.htaccess
-/pub/media/logo/*
+!/pub/media/logo/*
 /pub/media/custom_options/*
 !/pub/media/custom_options/.htaccess
 /pub/media/theme/*
+!/pub/media/theme/preview/*
 /pub/media/theme_customization/*
 !/pub/media/theme_customization/.htaccess
-/pub/media/wysiwyg/*
 !/pub/media/wysiwyg/.htaccess
 /pub/media/tmp/*
 !/pub/media/tmp/.htaccess
@@ -61,7 +62,6 @@ atlassian*
 !/pub/media/sitemap/.htaccess
 /pub/static/*
 !/pub/static/.htaccess
-
 /var/*
 !/var/.htaccess
 !/var/db.sql.gz

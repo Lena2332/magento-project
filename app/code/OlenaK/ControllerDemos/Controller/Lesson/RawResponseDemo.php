@@ -9,20 +9,15 @@ use Magento\Framework\Controller\Result\Raw;
 
 class RawResponseDemo implements HttpGetActionInterface
 {
-    private \Magento\Framework\App\RequestInterface $request;
-
     private \Magento\Framework\Controller\Result\RawFactory $rawFactory;
 
     /**
-     * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\Controller\Result\RawFactory $rawFactory
      */
     public function __construct(
-        \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Controller\Result\RawFactory $rawFactory
     )
     {
-        $this->request = $request;
         $this->rawFactory = $rawFactory;
     }
 
