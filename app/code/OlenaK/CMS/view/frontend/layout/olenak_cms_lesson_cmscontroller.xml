@@ -7,11 +7,6 @@
     <body>
         <referenceContainer name="content">
             <container name="olenak.cms.container" htmlTag="div" htmlClass="olenak-cms-layout">
-                <block class="Magento\Cms\Block\BlockByIdentifier" name="olenak.cms.fromadmin.block">
-                    <arguments>
-                        <argument name="identifier" xsi:type="string">alert_demo</argument>
-                    </arguments>
-                </block>
                 <block name="olenak.cms.text.parentblock"
                        class="Magento\Framework\View\Element\Template"
                        template="OlenaK_CMS::parent_block.phtml"
@@ -22,7 +17,7 @@
                     >
                         <arguments>
                             <argument name="boolean_parameter" xsi:type="boolean">false</argument>
-                            <argument name="string_parameter" translate="true" xsi:type="string">Demo string</argument>
+                            <argument name="string_parameter" translate="true" xsi:type="string">My param</argument>
                             <argument name="int_parameter" xsi:type="number">777</argument>
                             <argument name="float_parameter" xsi:type="number">777.77</argument>
                             <argument name="null_parameter" xsi:type="null"/>
