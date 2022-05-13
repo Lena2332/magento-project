@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<h4>This is a child block</h4>
+
+<h5>String</h5>
+<?= $block->getData('string_parameter') ?>
+
+<h5>Array</h5>
+<ul>
+    <?php foreach($block->getData('array_parameter') as $k => $v): ?>
+        <li>Value: <?= $v ?>; Name: <?= $k ?></li>
+    <?php endforeach; ?>
+</ul>
+
+
+<h5>Options</h5>
+<label>
+    <select name="test" >
+        <?php foreach($block->getData('options_parameter') as $k => $v): ?>
+            <option value="<?= $v['label'] ?>"><?= $v['value'] ?></option>
+        <?php endforeach; ?>
+    </select>
+</label>
+
+<h5>View Model</h5>
+<?= $escaper->escapeHtml(__('ViewModel is instance of: \%1', get_class($block->getData('view_model')))) ?>
+
+<h5>Helper</h5>
+<?= $block->getData('helper_call_result') ?>
