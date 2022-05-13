@@ -7,10 +7,14 @@
     <body>
         <referenceContainer name="content">
             <container name="olenak.cms.container" htmlTag="div" htmlClass="olenak-cms-layout">
+                <block class="Magento\Cms\Block\BlockByIdentifier" name="olenak.cms.fromadmin.block">
+                    <arguments>
+                        <argument name="identifier" xsi:type="string">alert_demo</argument>
+                    </arguments>
+                </block>
                 <block name="olenak.cms.text.parentblock"
                        class="Magento\Framework\View\Element\Template"
                        template="OlenaK_CMS::parent_block.phtml"
-                       before="-"
                 >
                     <block class="Magento\Framework\View\Element\Template"
                            name="olenak.cms.text.childblock"
