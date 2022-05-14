@@ -1,4 +1,23 @@
-Option 1,Option 1
-Option 2,Option 2
+"Option 1","Option 1"
+"Option 2","Option 2"
+"Option 3","Option 3"
+child_block_title,Дочірній блок
+String,Строка
+"String parameter: \%1","String parameter: \%1"
+Array,Массив
+value,Значення
+Name,Ім'я
+Options,Опції
+"View Model","View Model"
+"ViewModel is instance of: \%1","ViewModel is instance of: \%1"
+Helper,Helper
+left_block_text,left_block_text
+"Subscribe now to get a special promo!","Subscribe now to get a special promo!"
+"Sign Up for Our Newsletter:","Sign Up for Our Newsletter:"
+"Enter your email address","Enter your email address"
+Subscribe,Subscribe
+"This is a parent block","Родительский блок"
 product_warning,Це демонстраційний продукт. Ви можете додати їх у кошик і оформити замовлення лише для перевірки можливостей Magento
-left_block_text,Left column text
+"My param","Мій парамтер"
+"Array Element 1","Перший елемент масиву"
+"Array Element 2","Другий елемент масиву"
