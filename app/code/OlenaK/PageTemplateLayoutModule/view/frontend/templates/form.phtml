@@ -1,26 +1,30 @@
 <?php
-/** @var \Magento\Framework\View\Element\Template $block */
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
 ?>
-<h1>Page Template Layout Module</h1>
-<h3>Page Response</h3>
+<h1><?= $escaper->escapeHtml(__('Page Template Layout Module')) ?></h1>
+<h3><?= $escaper->escapeHtml(__('Page Response')) ?></h3>
 <div>
-    <form method="get" action="<?= $block->getUrl('olenak_page_tpl/lesson/formhandlerpage') ?>">
+    <form method="get" action="<?= $escaper->escapeHtmlAttr($block->getUrl('olenak_page_tpl/lesson/formhandlerpage')) ?>">
         <label>
-            <input type="text" name="vendor_name" placeholder="Put your vendor name">
+            <input type="text" name="vendor_name" placeholder="<?= $escaper->escapeHtml(__('Put your vendor name')) ?>">
         </label>
         <br><br>
         <label>
-            <input type="text" name="module_name" placeholder="Put your module name">
+            <input type="text" name="module_name" placeholder="<?= $escaper->escapeHtml(__('Put your module name')) ?>">
         </label>
         <br><br>
-        <button type="submit">Send</button>
+        <button type="submit"><?= $escaper->escapeHtml(__('Send')) ?></button>
     </form>
 </div>
-<h3>Test Redirect Response</h3>
+<h3><?= $escaper->escapeHtml(__('Test Redirect Response')) ?></h3>
 <div>
-    <a href="<?= $block->getUrl('olenak_controllerdemos/lesson/redirectresponsedemo') ?>" target="_blank">Go to my github</a>
+    <a href="<?= $escaper->escapeHtmlAttr($block->getUrl('olenak_controllerdemos/lesson/redirectresponsedemo')) ?>" target="_blank"><?= $escaper->escapeHtml(__('Go to my github')) ?></a>
 </div>
-<h3>Test Forward Response</h3>
+<h3><?= $escaper->escapeHtml(__('Test Forward Response')); ?></h3>
 <div>
-    <a href="<?= $block->getUrl('olenak_controllerdemos/lesson/forwardresponsedemo', ['vendor_name' => 'OlenaK', 'module_name' => 'Page template layout module']) ?>" target="_blank">Go to Json response</a>
+    <a href="<?= $escaper->escapeHtmlAttr($block->getUrl('olenak_controllerdemos/lesson/forwardresponsedemo', ['vendor_name' => 'OlenaK', 'module_name' => 'Page template layout module'])) ?>" target="_blank"><?= $escaper->escapeHtml(__('Go to Json response')) ?></a>
 </div>

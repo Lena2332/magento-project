@@ -1,8 +1,12 @@
 <?php
-/** @var \Magento\Framework\View\Element\Template $block */
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
 ?>
-<h1>Show parameters from PageResponse</h1>
-<p><strong>"vendor_name" value:</strong> <?= (string) $block->getRequest()->getParam('vendor_name') ?></p>
-<p><strong>"module_name" value:</strong> <?= (string) $block->getRequest()->getParam('module_name') ?></p>
+<h1><?= $escaper->escapeHtml(__('Show parameters from PageResponse')) ?></h1>
+<p><strong><?= $escaper->escapeHtml(__('"vendor_name" value')) ?>:</strong> <?= $escaper->escapeHtml($block->getRequest()->getParam('vendor_name')) ?></p>
+<p><strong><?= $escaper->escapeHtml(__('"module_name" value')) ?>:</strong> <?= $escaper->escapeHtml($block->getRequest()->getParam('module_name')) ?></p>
 <br>
-<p><a href="<?= $block->getUrl('olenak_page_tpl/lesson/pageresponsedemo') ?>">Return to form</a></p>
+<p><a href="<?= $escaper->escapeHtmlAttr($block->getUrl('olenak_page_tpl/lesson/pageresponsedemo')) ?>"><?= $escaper->escapeHtml(__('Return to form')) ?></a></p>
