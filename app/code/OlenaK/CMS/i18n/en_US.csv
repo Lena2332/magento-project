@@ -17,7 +17,7 @@ left_block_text,left_block_text
 "Enter your email address","Enter your email address"
 Subscribe,Subscribe
 "This is a parent block","This is a parent block"
-product_warning,product_warning
+product_warning,This is a demo product. You can add them to cart and place order only to test the Magento
 "My param","My param"
 "Array Element 1","Array Element 1"
 "Array Element 2","Array Element 2"

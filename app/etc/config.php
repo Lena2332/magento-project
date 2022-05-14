@@ -354,6 +354,7 @@ return [
         'Klarna_Kp' => 1,
         'Klarna_Onsitemessaging' => 1,
         'Klarna_KpGraphQl' => 1,
+        'OlenaK_CMS' => 1,
         'OlenaK_ControllerDemos' => 1,
         'OlenaK_PageTemplateLayoutModule' => 1,
         'PayPal_Braintree' => 1,
