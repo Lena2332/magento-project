@@ -6,5 +6,8 @@
  */
 ?>
 
-<div class="message-error error message"><?= $escaper->escapeHtml(__('product_warning')) ?></div>
+<div class="message-error error message" style="clear: both">
+        <?= $escaper->escapeHtml(__($block->getData('message'))) ?>
+</div>
+
 
