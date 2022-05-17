@@ -14,5 +14,12 @@
                 </arguments>
             </block>
         </referenceContainer>
+        <referenceContainer name="left.image.block">
+            <block class="Magento\Cms\Block\BlockByIdentifier" name="olenak.cms.left.block">
+                <arguments>
+                    <argument name="identifier" xsi:type="string">left_image_block</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>

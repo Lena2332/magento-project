@@ -2,6 +2,6 @@
 
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
     <referenceContainer name="div.sidebar.additional">
-        <referenceBlock name="olenak.cms.left.block" remove="true" />
+        <referenceContainer name="left.image.block" remove="true" />
     </referenceContainer>
 </layout>
