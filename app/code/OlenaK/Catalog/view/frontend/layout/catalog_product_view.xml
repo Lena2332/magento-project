@@ -9,7 +9,7 @@
                    before="product.info.details"
             >
                 <arguments>
-                    <argument name="message" xsi:type="string">product_warning</argument>
+                    <argument name="message" xsi:type="string">This is a demo product. You can add them to cart and place order only to test the Magento</argument>
                 </arguments>
             </block>
         </referenceContainer>
