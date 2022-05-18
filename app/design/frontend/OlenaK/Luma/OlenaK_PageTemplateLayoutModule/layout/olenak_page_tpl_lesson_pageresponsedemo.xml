@@ -5,6 +5,6 @@
       layout="2columns-right"
 >
     <body>
-        <referenceBlock name="olenak.page.template.layout.text.block" remove="true" />
+        <referenceContainer name="olenak.page.template.layout.text.block" remove="true" />
     </body>
 </page>
