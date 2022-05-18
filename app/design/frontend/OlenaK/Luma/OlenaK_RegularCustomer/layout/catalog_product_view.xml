@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+        <move element="olenak.regularcustomer.form.block" destination="olenak-regularcustomer-tab"/>
+        <move element="olenak.regularcustomer.cmsblock" destination="olenak-regularcustomer-tab" before="olenak.regularcustomer.form.block"/>
+        <move element="olenak.regularcustomer.title" destination="olenak-regularcustomer-tab" before="olenak.regularcustomer.cmsblock"/>
+
+        <referenceBlock name="product.info.details">
+            <block class="Magento\Framework\View\Element\Text\ListText"
+                   name="olenak-regularcustomer-tab"
+                   group="detailed_info"
+            >
+                <arguments>
+                    <argument name="sort_order" xsi:type="string">40</argument>
+                    <argument translate="true" name="title" xsi:type="string">Loyalty program</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
