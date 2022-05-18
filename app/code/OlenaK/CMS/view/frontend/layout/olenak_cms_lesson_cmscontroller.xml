@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="2columns-right"
+>
+    <body>
+        <referenceContainer name="content">
+            <container name="olenak.cms.container" htmlTag="div" htmlClass="olenak-cms-layout">
+                <block name="olenak.cms.text.parentblock"
+                       class="Magento\Framework\View\Element\Template"
+                       template="OlenaK_CMS::parent_block.phtml"
+                >
+                    <block class="Magento\Framework\View\Element\Template"
+                           name="olenak.cms.text.childblock"
+                           template="OlenaK_CMS::child_blocks/child.phtml"
+                    >
+                        <arguments>
+                            <argument name="boolean_parameter" xsi:type="boolean">false</argument>
+                            <argument name="string_parameter" translate="true" xsi:type="string">My param</argument>
+                            <argument name="int_parameter" xsi:type="number">777</argument>
+                            <argument name="float_parameter" xsi:type="number">777.77</argument>
+                            <argument name="null_parameter" xsi:type="null"/>
+                            <argument name="array_parameter" xsi:type="array">
+                                <item name="array_element_1" translate="true" xsi:type="string">Array Element 1</item>
+                                <item name="array_element_2" translate="true" xsi:type="string">Array Element 2</item>
+                            </argument>
+                            <argument name="url_parameter" xsi:type="url" path="olenak_cms/index/layoutresponse"/>
+                            <argument name="service_url_parameter" xsi:type="serviceUrl" path="olenak_cms/index/layoutresponse"/>
+                            <argument name="options_parameter" xsi:type="options" model="OlenaK\CMS\Model\Options"/>
+                            <argument name="view_model" xsi:type="object">OlenaK\CMS\ViewModel\TestViewModel</argument>
+                            <argument name="helper_call_result" xsi:type="helper" helper="OlenaK\CMS\Helper\Data::getLoremIpsumText"/>
+                        </arguments>
+                    </block>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

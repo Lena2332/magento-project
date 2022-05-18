@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="2columns-right"
+>
+    <body>
+        <referenceBlock name="olenak.cms.text.childblock">
+            <arguments>
+                <argument name="boolean_parameter" xsi:type="boolean">true</argument>
+                <argument name="string_parameter" translate="true" xsi:type="string">Demo string for .local website</argument>
+                <argument name="int_parameter" xsi:type="number">888</argument>
+                <argument name="array_parameter" xsi:type="array">
+                    <item name="array_element_1" xsi:type="null"/>
+                    <item name="array_element_2" xsi:type="null"/>
+                    <item name="array_element_3" translate="true" xsi:type="string">Array Element 3</item>
+                    <item name="array_element_4" translate="true" xsi:type="string">Array Element 4</item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,23 @@
+"Option 1","Option 1"
+"Option 2","Option 2"
+"Option 3","Option 3"
+child_block_title,child_block_title
+String,String
+"String parameter: \%1","String parameter: \%1"
+Array,Array
+value,value
+Name,Name
+Options,Options
+"View Model","View Model"
+"ViewModel is instance of: \%1","ViewModel is instance of: \%1"
+Helper,Helper
+left_block_text,left_block_text
+"Subscribe now to get a special promo!","Subscribe now to get a special promo!"
+"Sign Up for Our Newsletter:","Sign Up for Our Newsletter:"
+"Enter your email address","Enter your email address"
+Subscribe,Subscribe
+"This is a parent block","This is a parent block"
+product_warning,product_warning
+"My param","My param"
+"Array Element 1","Array Element 1"
+"Array Element 2","Array Element 2"
