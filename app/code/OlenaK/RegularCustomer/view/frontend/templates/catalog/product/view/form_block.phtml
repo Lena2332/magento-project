@@ -43,7 +43,7 @@ $product = $block->getData('product');
             <div class="primary">
                 <input type="hidden"
                        name="product_id"
-                       value="<?= $escaper->escapeHtmlAttr((int) $product->getId()) ?>"
+                       value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
                 />
                 <button type="submit"
                         title="<?= $escaper->escapeHtmlAttr(__('Send Request')) ?>"
