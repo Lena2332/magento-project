@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="2columns-right"
+>
+    <body>
+        <referenceContainer name="content">
+            <block name="olenak.regularcustomer.title" class="Magento\Framework\View\Element\Template"
+                   template="OlenaK_RegularCustomer::catalog/product/view/title_form.phtml">
+                <arguments>
+                    <argument name="title_txt" xsi:type="string">Loyalty program for Regular Customers</argument>
+                </arguments>
+            </block>
+            <block name="olenak.regularcustomer.cmsblock" class="Magento\Cms\Block\BlockByIdentifier" >
+                <arguments>
+                    <argument name="identifier" xsi:type="string">cms_block_regular_customer</argument>
+                </arguments>
+            </block>
+            <block name="olenak.regularcustomer.form.block" class="OlenaK\RegularCustomer\Block\Product\View\ProductDiscountBlock"
+                   template="OlenaK_RegularCustomer::catalog/product/view/form_block.phtml">
+                <arguments>
+                    <!--  <argument name="cache_lifetime" xsi:type="number">84600</argument> -->
+                    <argument name="request_submit_url"
+                              path="regular-customer/index/request"
+                              xsi:type="url"
+                    />
+                    <argument name="product"
+                              helper="Magento\Catalog\Helper\Data::getProduct"
+                              xsi:type="helper"
+                    />
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
