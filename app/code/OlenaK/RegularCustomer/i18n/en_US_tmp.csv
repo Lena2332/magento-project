@@ -1,6 +1,6 @@
 "You request for product %1 accepted for review!","You request for product %1 accepted for review!"
 "Your request can't be sent. Please, contact us if you see this message.","Your request can't be sent. Please, contact us if you see this message."
-Name,Name
-Email,Email
-"Send Request","Send Request"
+"Your name",Name
+"Your email",Email
+"Send your request","Send Request"
 

@@ -16,11 +16,11 @@ $product = $block->getData('product');
         <fieldset class="fieldset">
             <div class="field name required">
                 <label class="label" for="name">
-                    <span><?= $escaper->escapeHtml(__('Name')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Your name')) ?></span>
                 </label>
                 <div class="control">
                     <input name="name"
-                           title="<?= $escaper->escapeHtmlAttr(__('Name')) ?>"
+                           title="<?= $escaper->escapeHtmlAttr(__('Your name')) ?>"
                            class="input-text"
                            type="text"
                     />
@@ -28,11 +28,11 @@ $product = $block->getData('product');
             </div>
             <div class="field email required">
                 <label class="label" for="email">
-                    <span><?= $escaper->escapeHtml(__('Email')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Your email')) ?></span>
                 </label>
                 <div class="control">
                     <input name="email"
-                           title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
+                           title="<?= $escaper->escapeHtmlAttr(__('Your email')) ?>"
                            class="input-text"
                            type="email"
                     />
@@ -46,10 +46,10 @@ $product = $block->getData('product');
                        value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
                 />
                 <button type="submit"
-                        title="<?= $escaper->escapeHtmlAttr(__('Send Request')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Send your request')) ?>"
                         class="action submit primary"
                 >
-                    <span><?= $escaper->escapeHtml(__('Send Request')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Send your request')) ?></span>
                 </button>
             </div>
         </div>
