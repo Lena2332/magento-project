@@ -10,6 +10,8 @@ namespace OlenaK\RegularCustomer\Model;
  * @method $this setProductId(int $productId)
  * @method int|string|null getCustomerId()
  * @method $this setCustomerId(int $customerId)
+ * @method int|string|null getAdminUserId()
+ * @method $this setAdminUserId(int $adminUserId)
  * @method string|null getName()
  * @method $this setName(string $name)
  * @method string|null getEmail()
@@ -30,5 +32,3 @@ class DiscountRequest extends \Magento\Framework\Model\AbstractModel
         $this->_init(\OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest::class);
     }
 }
-
-

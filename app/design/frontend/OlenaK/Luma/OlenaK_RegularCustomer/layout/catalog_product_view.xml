@@ -5,7 +5,6 @@
     <body>
         <move element="olenak.regularcustomer.form.block" destination="olenak-regularcustomer-tab"/>
         <move element="olenak.regularcustomer.cmsblock" destination="olenak-regularcustomer-tab" before="olenak.regularcustomer.form.block"/>
-        <move element="olenak.regularcustomer.title" destination="olenak-regularcustomer-tab" before="olenak.regularcustomer.cmsblock"/>
 
         <referenceBlock name="product.info.details">
             <block class="Magento\Framework\View\Element\Text\ListText"
