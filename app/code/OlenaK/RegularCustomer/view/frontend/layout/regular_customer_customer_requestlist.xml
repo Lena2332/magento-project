@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <update handle="customer_account"/>
+    <head>
+        <title>Personal Discount List</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="olenak.regular-customer.request.list"
+                   template="OlenaK_RegularCustomer::customer/account/request_list.phtml"
+                   cacheable="false"
+            >
+                <arguments>
+                    <argument name="view_model" xsi:type="object">OlenaK\RegularCustomer\ViewModel\Customer\RequestList</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
