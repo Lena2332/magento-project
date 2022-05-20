@@ -7,6 +7,14 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <referenceBlock name="top.links">
+            <block class="OlenaK\RegularCustomer\Block\Customer\RequestListLink" name="olenak.regularcustomer.top.discountlinks" after="wish-list-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Requests</argument>
+                    <argument name="sortOrder" xsi:type="number">40</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
         <referenceBlock name="footer_links">
             <block class="Magento\Sales\Block\Guest\Link" name="olenak.regular.customer.link">
                 <arguments>
