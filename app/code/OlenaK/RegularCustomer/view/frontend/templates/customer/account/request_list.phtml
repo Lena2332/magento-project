@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @var \OlenaK\RegularCustomer\ViewModel\Customer\RequestList $viewModel
+ */
+$viewModel = $block->getData('view_model');
+?>
+<ul>
+    <?php /** @var \OlenaK\RegularCustomer\Model\DiscountRequest $discountRequest */ ?>
+    <?php foreach ($viewModel->getDiscountRequestCollection() as $discountRequest): ?>
+        <?php $product = $viewModel->getProduct((int) $discountRequest->getProductId()); ?>
+        <li>
+            <?php if ($product): ?>
+                <span><?= $escaper->escapeHtml(__('Requested product:')) ?></span>
+                <a href="<?= $escaper->escapeHtmlAttr($product->getProductUrl()) ?>">
+                    <?= $escaper->escapeHtml($product->getName()) ?>
+                </a>
+            <?php else: ?>
+                <?php
+                /**
+                 * 1. Here we use concat because only the phrase 'Requested product:' is translated
+                 * 2. $discountRequest->getProductName() - to be implemented in the future
+                 */
+                ?>
+                <span><?= $escaper->escapeHtml(__('Requested product:') . ' n/a'/*$discountRequest->getProductName()*/) ?></span>
+            <?php endif; ?>
+            <br/>
+        </li>
+    <?php endforeach; ?>
+</ul>
