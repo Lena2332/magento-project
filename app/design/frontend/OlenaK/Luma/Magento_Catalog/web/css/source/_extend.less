@@ -1,0 +1,39 @@
+//Tabs on product page for desktop
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product.data.items {
+        .lib-data-tabs(
+            @_tab-control-background-color:@olenak__color_blue,
+            @_tab-control-background-color-hover:@olenak__color_light_blue,
+            @_tab-control-color: #fff,
+            @_tab-control-color-visited: #fff,
+            @_tab-control-color-hover: #fff
+        );
+        .data.switch .counter {
+            color: #fff;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .product.data.items {
+        .item.title {
+            > .switch {
+                background-color: @olenak__color_blue;
+                color:#fff;
+            }
+            > .switch:hover {
+                background-color: @olenak__color_light_blue;
+                font-weight: bold;
+            }
+            > .switch:visited {
+                color:#fff;
+            }
+        }
+        .data.switch .counter {
+            color: #fff;
+        }
+    }
+    .nav-sections-item-switch {
+        color: #fff;
+    }
+}
