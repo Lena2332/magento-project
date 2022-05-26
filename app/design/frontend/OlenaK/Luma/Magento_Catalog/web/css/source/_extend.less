@@ -4,8 +4,10 @@
         .lib-data-tabs(
             @_tab-control-background-color:@olenak__color_blue,
             @_tab-control-background-color-hover:@olenak__color_light_blue,
+            @_tab-control-background-color-active:@olenak__color_light_blue,
             @_tab-control-color: #fff,
             @_tab-control-color-visited: #fff,
+            @_tab-control-color-active: #fff,
             @_tab-control-color-hover: #fff
         );
         .data.switch .counter {
@@ -24,8 +26,25 @@
             > .switch:hover {
                 background-color: @olenak__color_light_blue;
                 font-weight: bold;
+                color:#fff;
             }
             > .switch:visited {
+                color:#fff;
+            }
+        }
+
+        .item.title.active {
+            > .switch {
+                color:#fff;
+            }
+
+            > .switch:hover {
+                color:#fff;
+            }
+        }
+
+        .item.title:not(.disabled) {
+            > .switch:active {
                 color:#fff;
             }
         }
