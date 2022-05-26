@@ -1,0 +1,58 @@
+//Tabs on product page for desktop
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product.data.items {
+        .lib-data-tabs(
+            @_tab-control-background-color: @color-blue3,
+            @_tab-control-background-color-hover: @color-sky-blue1,
+            @_tab-control-background-color-active: @color-sky-blue1,
+            @_tab-control-color: @color-white,
+            @_tab-control-color-visited: @color-white,
+            @_tab-control-color-active: @color-white,
+            @_tab-control-color-hover: @color-white
+        );
+        .data.switch .counter {
+            color: @color-white;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .product.data.items {
+        .item.title {
+            > .switch {
+                background-color: @color-blue3;
+                color: @color-white;
+            }
+            > .switch:hover {
+                background-color: @color-sky-blue1;
+                font-weight: bold;
+                color: @color-white;
+            }
+            > .switch:visited {
+                color: @color-white;
+            }
+        }
+
+        .item.title.active {
+            > .switch {
+                color: @color-white;
+            }
+
+            > .switch:hover {
+                color: @color-white;
+            }
+        }
+
+        .item.title:not(.disabled) {
+            > .switch:active {
+                color: @color-white;
+            }
+        }
+        .data.switch .counter {
+            color: @color-white;
+        }
+    }
+    .nav-sections-item-switch {
+        color: @color-white;
+    }
+}

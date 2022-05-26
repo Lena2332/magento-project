@@ -1,0 +1,88 @@
+@olenak__color_light_red: #ffcccb;
+
+//Info messages
+@message-success__background: @color-blue3;
+@message-success__color: @color-white;
+@message-success-icon__color-inner: @color-white;
+@message-success-icon__background: @color-white;
+@message-success-link__color: @message-success__color;
+@message-info__color: @color-white;
+@message-notice__color: @color-white;
+@message-info__background: @color-sky-blue1;
+@message-info-link__color: @message-info__color;
+@message-notice__background: @color-sky-blue1;
+@message-notice-link__color: @message-notice__color;
+@message-warning__background: @olenak__color_light_red;
+@message-warning-link__color: @message-warning__color;
+@message-error__background: @olenak__color_light_red;
+@message-error-link__color: @message-error__color;
+
+& when (@media-common = true) {
+    //Orange links
+    a,
+    a:visited,
+    .breadcrumbs a,
+    .breadcrumbs a:visited {
+        color: @color-orange-red1;
+    }
+
+    .navigation a,
+    .navigation a:hover {
+        color: @color-white;
+    }
+
+    .navigation .level0 > .level-top:hover,
+    .navigation .level0.active > .level-top,
+    .navigation .level0.has-active > .level-top {
+        color: @color-white;
+    }
+
+    .navigation .submenu > li > a:hover,
+    .navigation .level0.has-active > a:not(.ui-state-active) {
+        color: @color-orange-red1;
+    }
+
+    .message.error,
+    .message.notice,
+    .message.info {
+       font-weight: bold;
+    }
+
+    .message a {
+        text-decoration: underline;
+    }
+
+    .footer.content .links a,
+    .footer.content .links a:hover,
+    .footer.content .links a:visited {
+        color: @color-white;
+        font-weight: bold;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .navigation .level0 > .level-top,
+    .navigation .level0.has-active > .level-top,
+    .navigation .level0 > .level-top:hover,
+    .navigation .level0.active > .level-top {
+        color: @color-white;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    .navigation .level0.active > a:not(.ui-state-active),
+    .navigation .level0.has-active > a:not(.ui-state-active) {
+        color: @color-white;
+    }
+
+    .navigation .submenu,
+    .navigation .submenu:hover,
+    .navigation .submenu:not(:first-child) ul > li a,
+    .navigation .submenu:not(:first-child) .active > a {
+        color: @color-white;
+    }
+}
+
+
