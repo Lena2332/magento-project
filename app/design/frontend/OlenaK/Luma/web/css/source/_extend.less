@@ -5,12 +5,12 @@
 
 //Info messages
 @message-success__background: @olenak__color_blue;
-@message-success__color: #fff;
-@message-success-icon__color-inner: #fff;
-@message-success-icon__background: #fff;
+@message-success__color: @color-white;
+@message-success-icon__color-inner: @color-white;
+@message-success-icon__background: @color-white;
 @message-success-link__color: @message-success__color;
-@message-info__color: #fff;
-@message-notice__color: #fff;
+@message-info__color: @color-white;
+@message-notice__color: @color-white;
 @message-info__background: @olenak__color_light_blue;
 @message-info-link__color: @message-info__color;
 @message-notice__background: @olenak__color_light_blue;
@@ -22,23 +22,32 @@
 
 & when (@media-common = true) {
     //Orange links
-    a, a:visited,.breadcrumbs a,.breadcrumbs a:visited {
+    a,
+    a:visited,
+    .breadcrumbs a,
+    .breadcrumbs a:visited {
+        color: @olenak__color_dark_orange;
+    }
+
+    .navigation a,
+    .navigation a:hover {
+        color: @color-white;
+    }
+
+    .navigation .level0 > .level-top:hover,
+    .navigation .level0.active > .level-top,
+    .navigation .level0.has-active > .level-top {
+        color: @color-white;
+    }
+
+    .navigation .submenu > li > a:hover,
+    .navigation .level0.has-active > a:not(.ui-state-active) {
         color:@olenak__color_dark_orange;
     }
 
-    .navigation a, .navigation a:hover {
-        color: #fff;
-    }
-
-    .navigation .level0 > .level-top:hover, .navigation .level0.active > .level-top, .navigation .level0.has-active > .level-top {
-        color: #fff;
-    }
-
-    .navigation .submenu > li > a:hover, .navigation .level0.has-active > a:not(.ui-state-active) {
-        color:@olenak__color_dark_orange;
-    }
-
-    .message.error, .message.notice, .message.info {
+    .message.error,
+    .message.notice,
+    .message.info {
        font-weight: bold;
     }
 
@@ -46,30 +55,37 @@
         text-decoration: underline;
     }
 
-    .footer.content .links a, .footer.content .links a:hover, .footer.content .links a:visited{
-        color:#fff;
+    .footer.content .links a,
+    .footer.content .links a:hover,
+    .footer.content .links a:visited {
+        color: @color-white;
         font-weight: bold;
     }
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 
-    .navigation .level0 > .level-top, .navigation .level0.has-active > .level-top, .navigation .level0 > .level-top:hover, .navigation .level0.active > .level-top {
-        color: #fff;
+    .navigation .level0 > .level-top,
+    .navigation .level0.has-active > .level-top,
+    .navigation .level0 > .level-top:hover,
+    .navigation .level0.active > .level-top {
+        color: @color-white;
     }
-
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
 
-    .navigation .level0.active > a:not(.ui-state-active), .navigation .level0.has-active > a:not(.ui-state-active) {
-        color: #fff;
+    .navigation .level0.active > a:not(.ui-state-active),
+    .navigation .level0.has-active > a:not(.ui-state-active) {
+        color: @color-white;
     }
 
-    .navigation .submenu, .navigation .submenu:hover, .navigation .submenu:not(:first-child) ul > li a, .navigation .submenu:not(:first-child) .active > a {
-        color: #fff;
+    .navigation .submenu,
+    .navigation .submenu:hover,
+    .navigation .submenu:not(:first-child) ul > li a,
+    .navigation .submenu:not(:first-child) .active > a {
+        color: @color-white;
     }
-
 }
 
 
