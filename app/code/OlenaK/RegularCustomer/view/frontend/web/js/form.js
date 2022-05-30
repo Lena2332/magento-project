@@ -42,9 +42,15 @@ define([
 
         ajaxSubmit: function () {
             let formData = new FormData($(this.element).get(0));
+
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
+            let action = this.options.action;
 
+            this.ajaxInit(action, formData);
+        },
+
+        ajaxInit: function (action, formData) {
             $.ajax({
                 url: this.options.action,
                 data: formData,
@@ -68,10 +74,10 @@ define([
                 },
 
                 error: function () {
-                     alert({
-                         title: $.mage.__('Error'),
-                         content: $.mage.__('Your request can\'t be sent. Please, contact us if you see this message.')
-                     });
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__('Your request can\'t be sent. Please, contact us if you see this message.')
+                    });
                 },
 
                 complete: function () {
@@ -81,7 +87,6 @@ define([
                     $('body').trigger('processStop');
                 }
             });
-            console.log('submitted');
         }
 
     });
