@@ -6,12 +6,19 @@
  * @var \Magento\Catalog\Model\Product $product
  */
 $product = $block->getData('product');
+$isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0;
 ?>
 <div class="dv-campus-personal-discount-request">
-    <form class="form"
-          id="olenak-personal-discount-form"
-          action="<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>"
+    <form class="form olenak-personal-discount-form"
+          action="/errors/404.php"
+          onsubmit="return false;"
           method="post"
+          data-mage-init='{"OlenaK_RegularCustomer_form": {
+                                  "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
+                                  "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
+                            }
+          }'
+
     >
         <fieldset class="fieldset">
             <div class="field name required">
@@ -23,6 +30,7 @@ $product = $block->getData('product');
                            title="<?= $escaper->escapeHtmlAttr(__('Your name')) ?>"
                            class="input-text"
                            type="text"
+                           data-validate="{required:true}"
                     />
                 </div>
             </div>
@@ -35,6 +43,7 @@ $product = $block->getData('product');
                            title="<?= $escaper->escapeHtmlAttr(__('Your email')) ?>"
                            class="input-text"
                            type="email"
+                           data-validate="{required:true, 'validate-email':true}"
                     />
                 </div>
             </div>
@@ -44,6 +53,10 @@ $product = $block->getData('product');
                 <input type="hidden"
                        name="product_id"
                        value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
+                />
+                <input type="hidden"
+                       name="product_name"
+                       value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
                 />
                 <button type="submit"
                         title="<?= $escaper->escapeHtmlAttr(__('Send your request')) ?>"

@@ -7,21 +7,16 @@ namespace OlenaK\RegularCustomer\Controller\Index;
 use OlenaK\RegularCustomer\Model\DiscountRequest;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\Result\Json;
 
 class Request implements
     \Magento\Framework\App\Action\HttpPostActionInterface,
     \Magento\Framework\App\CsrfAwareActionInterface
 {
     /**
-     * @var \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
+     * @var \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      */
-    private \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory;
-
-    /**
-     * @var \Magento\Framework\Message\ManagerInterface $messageManager
-     */
-    private \Magento\Framework\Message\ManagerInterface $messageManager;
+    private \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
     /**
      * @var \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
@@ -54,8 +49,7 @@ class Request implements
     private \Psr\Log\LoggerInterface $logger;
 
     /**
-     * @param \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
-     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      * @param \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
      * @param \OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource
      * @param \Magento\Framework\App\RequestInterface $request
@@ -64,8 +58,7 @@ class Request implements
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
+        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory,
         \OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource,
         \Magento\Framework\App\RequestInterface $request,
@@ -73,8 +66,7 @@ class Request implements
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Psr\Log\LoggerInterface $logger
     ) {
-        $this->redirectFactory = $redirectFactory;
-        $this->messageManager = $messageManager;
+        $this->jsonFactory = $jsonFactory;
         $this->discountRequestFactory = $discountRequestFactory;
         $this->discountRequestResource = $discountRequestResource;
         $this->request = $request;
@@ -86,9 +78,9 @@ class Request implements
     /**
      * Controller action
      *
-     * @return Redirect
+     * @return Json
      */
-    public function execute(): Redirect
+    public function execute(): Json
     {
         /** @var DiscountRequest $discountRequest */
         $discountRequest = $this->discountRequestFactory->create();
@@ -100,20 +92,22 @@ class Request implements
                 ->setStoreId($this->storeManager->getStore()->getId());
 
             $this->discountRequestResource->save($discountRequest);
-            $this->messageManager->addSuccessMessage(
-                __('You request for product %1 accepted for review!', $this->request->getParam('productName'))
+            $isAdded = true;
+            $message = __(
+                'You request for product %1 accepted for review!',
+                $this->request->getParam('product_name')
             );
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
-            $this->messageManager->addErrorMessage(
-                __('Your request can\'t be sent. Please, contact us if you see this message.')
-            );
+            $isAdded = false;
+            $message = __('Your request can\'t be sent. Please, contact us if you see this message.');
         }
 
-        $redirect = $this->redirectFactory->create();
-        $redirect->setRefererUrl();
-
-        return $redirect;
+        return $this->jsonFactory->create()
+                ->setData([
+                     'message' => $message,
+                     'added' => $isAdded
+                ]);
     }
 
     /**

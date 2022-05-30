@@ -1,8 +1,13 @@
 "You request for product %1 accepted for review!","You request for product %1 accepted for review!"
 "Your request can't be sent. Please, contact us if you see this message.","Your request can't be sent. Please, contact us if you see this message."
-Name,Name
-Email,Email
-"Send Request","Send Request"
-"Loyalty program for Regular Customers","Loyalty program for Regular Customers"
+"Your name","Your name"
+"Your email","Your email"
+"Send your request","Send your request"
+"Requested product:","Requested product:"
+"Your request posted","Your request posted"
+"Your request not posted","Your request not posted"
+Error,Error
 "Personal Discount List","Personal Discount List"
 "My Requests","My Requests"
+"Loyalty program for Regular Customers","Loyalty program for Regular Customers"
+

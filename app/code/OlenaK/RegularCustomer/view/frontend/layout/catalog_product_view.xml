@@ -29,8 +29,12 @@
                                       helper="Magento\Catalog\Helper\Data::getProduct"
                                       xsi:type="helper"
                             />
+                            <argument name="is_modal" xsi:type="boolean">1</argument>
                         </arguments>
                     </block>
+                    <block name="olenak.regularcustomer.form.open.button"  class="Magento\Framework\View\Element\Template"
+                           template="OlenaK_RegularCustomer::catalog/product/view/form_open_button.phtml"
+                    />
                 </container>
             </referenceContainer>
     </body>
