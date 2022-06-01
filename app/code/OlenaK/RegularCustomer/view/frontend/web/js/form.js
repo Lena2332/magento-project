@@ -2,8 +2,7 @@ define([
     'jquery',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
-    'mage/cookies',
-    'OlenaK_RegularCustomer/js/custom-ajax'
+    'mage/cookies'
 ], function ($, OlenaK_RegularCustomer_customAjax) {
     'use strict';
 
@@ -46,7 +45,7 @@ define([
             formData.append('isAjax', 1);
             let action = this.options.action;
 
-            OlenaK_RegularCustomer_customAjax(action, formData);
+            OlenaK_RegularCustomer_customAjax.ajaxInit(action, formData);
         }
     });
 

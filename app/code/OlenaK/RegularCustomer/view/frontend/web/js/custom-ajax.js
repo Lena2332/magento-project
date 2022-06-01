@@ -7,7 +7,8 @@ define([
 ], function ($, alert) {
     'use strict';
 
-        return function (action, formData) {
+        return {
+            ajaxInit: function (action, formData) {
                 $.ajax({
                     url: this.options.action,
                     data: formData,
@@ -44,5 +45,6 @@ define([
                         $('body').trigger('processStop');
                     }
                 });
+            }
         };
 });
