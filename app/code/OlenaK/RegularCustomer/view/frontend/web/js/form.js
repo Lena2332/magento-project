@@ -44,8 +44,8 @@ define([
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
             let action = this.options.action;
-
-            OlenaK_RegularCustomer_customAjax.ajaxInit(action, formData);
+            console.log('form-js');
+            OlenaK_RegularCustomer_customAjax();
         }
     });
 
