@@ -8,7 +8,7 @@ define([
     'use strict';
 
         return function (action, formData) {
-            let myXHR = $.ajax({
+            $.ajax({
                 url: action,
                 data: formData,
                 processData: false,
@@ -36,6 +36,5 @@ define([
                     });
                 }
             });
-            return myXHR;
         };
 });
