@@ -1,10 +1,10 @@
 define([
     'jquery',
-    'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
-    'mage/cookies'
-], function ($, alert) {
+    'mage/cookies',
+    'OlenaK_RegularCustomer/js/custom-ajax'
+], function ($, OlenaK_RegularCustomer_customAjax) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
@@ -42,55 +42,13 @@ define([
 
         ajaxSubmit: function () {
             let formData = new FormData($(this.element).get(0));
-
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
             let action = this.options.action;
 
-            this.ajaxInit(action, formData);
-        },
-
-        ajaxInit: function (action, formData) {
-            $.ajax({
-                url: this.options.action,
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'post',
-                dataType: 'json',
-                context: this,
-
-                beforeSend: function () {
-                    $('body').trigger('processStart');
-                },
-
-                success: function (response) {
-                    let title = response.added ? $.mage.__('Your request posted') : $.mage.__('Your request not posted');
-
-                    alert({
-                        title: title,
-                        content: response.message
-                    });
-                },
-
-                error: function () {
-                    alert({
-                        title: $.mage.__('Error'),
-                        content: $.mage.__('Your request can\'t be sent. Please, contact us if you see this message.')
-                    });
-                },
-
-                complete: function () {
-                    if (this.options.isModal) {
-                        $(this.element).modal('closeModal');
-                    }
-                    $('body').trigger('processStop');
-                }
-            });
+            OlenaK_RegularCustomer_customAjax(action, formData);
         }
-
     });
 
     return $.OlenaK.regularCustomer_form;
-
 });
