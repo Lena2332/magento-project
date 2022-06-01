@@ -14,9 +14,9 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
           onsubmit="return false;"
           method="post"
           data-mage-init='{"OlenaK_RegularCustomer_form": {
-                                  "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
-                                  "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
-                            }
+                  "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
+                  "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
+              }
           }'
 
     >
