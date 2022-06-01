@@ -1,9 +1,10 @@
 define([
     'jquery',
+    'OlenaK_RegularCustomer_customAjax',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, OlenaK_RegularCustomer_customAjax) {
+], function ($, asyncFormSubmit) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
@@ -44,8 +45,15 @@ define([
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
             let action = this.options.action;
-            console.log('form-js');
-            OlenaK_RegularCustomer_customAjax();
+            asyncFormSubmit(action, formData);
+            $(document).on('ajaxComplete', this.ajaxComplete().bind(this));
+        },
+
+        ajaxComplete: function () {
+            if (this.options.isModal) {
+                $(this.element).modal('closeModal');
+            }
+            $('body').trigger('processStop');
         }
     });
 
