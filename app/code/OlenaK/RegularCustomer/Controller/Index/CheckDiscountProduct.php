@@ -72,7 +72,7 @@ class CheckDiscountProduct implements
            $disqountRequestCollection = $this->discountRequestProvider->getCurrentCustomerDiscountRequests($customerId);
            $productIdsArr = array_unique(array_filter($disqountRequestCollection->getColumnValues('product_id')));
         } else{
-           $productIdsArr = $this->customerSession->getDiscountRequestProductIds();
+           $productIdsArr = $this->customerSession->getDiscountRequestProductIds() ?? [];
         }
 
         $isUsed = in_array($productId, $productIdsArr);

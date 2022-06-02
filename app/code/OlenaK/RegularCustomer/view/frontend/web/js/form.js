@@ -10,11 +10,15 @@ define([
     $.widget('OlenaK.regularCustomer_form', {
         options: {
             action: '',
-            isModal: 0
+            isModal: 0,
+            actionCheck: ''
         },
 
         _create: function () {
             $(this.element).on('submit.olenak_personal_disc_form', this.sendRequest.bind(this));
+
+            this.ajaxCheck();
+
             if (this.options.isModal) {
                 $(this.element).modal({
                     buttons: []
@@ -32,7 +36,7 @@ define([
             if (!this.validate()) {
                 return;
             }
-
+            console.log('start');
             this.ajaxSubmit();
         },
 
@@ -71,6 +75,8 @@ define([
                         title: title,
                         content: response.message
                     });
+
+                    this.alreadyRequestedAction();
                 },
 
                 error: function () {
@@ -87,10 +93,46 @@ define([
                     $('body').trigger('processStop');
                 }
             });
-        }
+        },
 
+        ajaxCheck: function () {
+            let productId = $(this.element).find('input[name = "product_id"]').val();
+
+            $.ajax({
+                url: this.options.actionCheck,
+                data: {
+                    product_id: productId,
+                    form_key: $.mage.cookies.get('form_key'),
+                    isAjax: 1
+                },
+                type: 'post',
+                dataType: 'json',
+                context: this,
+
+                success: function (response) {
+                    if (response.isUsed) {
+                        this.alreadyRequestedAction();
+                    }
+                },
+
+                error: function () {
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__('We can\'t check if it has beent requested.')
+                    });
+                }
+            });
+        },
+
+        alreadyRequestedAction: function () {
+            //hide button and form, show message
+            $(this.element).hide();
+            $(document).trigger('olenak_regular_customer_hide_button');
+            let message = $.mage.__('Already requested!');
+
+            $('.customer_request_block').after('<div class=\'message-notice notice message\'>' + message + '</div>');
+        }
     });
 
     return $.OlenaK.regularCustomer_form;
-
 });

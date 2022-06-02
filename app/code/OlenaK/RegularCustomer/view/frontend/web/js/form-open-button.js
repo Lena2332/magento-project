@@ -11,6 +11,8 @@ define([
          */
         _create: function () {
             $(this.element).on('click.olenak_regular_customer_form_open_button',this.openRequestForm.bind(this));
+
+            $(document).on('olenak_regular_customer_hide_button', this.hideButton());
         },
 
         /**
@@ -18,6 +20,10 @@ define([
          */
         openRequestForm: function () {
             $(document).trigger('olenak_regular_customer_form_open');
+        },
+
+        hideButton: function () {
+            $(this.element).hide();
         }
     });
 
