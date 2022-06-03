@@ -42,18 +42,16 @@ define([
 
         ajaxSubmit: function () {
             let formData = new FormData($(this.element).get(0));
+
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
-            let action = this.options.action;
-            asyncFormSubmit(action, formData);
-            $(document).on('ajaxComplete', this.ajaxComplete().bind(this));
+            asyncFormSubmit(this.options.action, formData).always(this.ajaxComplete.bind(this));
         },
 
         ajaxComplete: function () {
             if (this.options.isModal) {
                 $(this.element).modal('closeModal');
             }
-            $('body').trigger('processStop');
         }
     });
 
