@@ -4,7 +4,15 @@
 >
     <body>
         <move element="olenak.regularcustomer.container.form" destination="olenak-regularcustomer-tab"/>
+
         <referenceBlock name="olenak.regularcustomer.title" remove="true"/>
+        <referenceBlock name="olenak.regularcustomer.form.open.button" remove="true"/>
+
+        <referenceBlock name="olenak.regularcustomer.form.block">
+            <arguments>
+                <argument name="is_modal" xsi:type="boolean">0</argument>
+            </arguments>
+        </referenceBlock>
 
         <referenceBlock name="product.info.details">
             <block class="Magento\Framework\View\Element\Text\ListText"

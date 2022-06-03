@@ -36,7 +36,7 @@ return [
         ]
     ],
     'x-frame-options' => 'SAMEORIGIN',
-    'MAGE_MODE' => 'production',
+    'MAGE_MODE' => 'developer',
     'session' => [
         'save' => 'files'
     ],
@@ -62,7 +62,7 @@ return [
     ],
     'cache_types' => [
         'config' => 1,
-        'layout' => 0,
+        'layout' => 1,
         'block_html' => 1,
         'collections' => 1,
         'reflection' => 1,
@@ -72,9 +72,9 @@ return [
         'customer_notification' => 1,
         'config_integration' => 1,
         'config_integration_api' => 1,
-        'full_page' => 0,
+        'full_page' => 1,
         'config_webservice' => 1,
-        'translate' => 0,
+        'translate' => 1,
         'vertex' => 1
     ],
     'downloadable_domains' => [
