@@ -11,7 +11,7 @@ define([
          */
         _create: function () {
             $(this.element).on('click.olenak_regular_customer_form_open_button',this.openRequestForm.bind(this));
-
+            //Used if customer requested discount for product
             $(document).on('olenak_regular_customer_hide_button', this.hideButton.bind(this));
         },
 
