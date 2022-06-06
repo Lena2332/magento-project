@@ -1,11 +1,10 @@
 define([
     'jquery',
-    'Magento_Ui/js/modal/alert',
     'OlenaK_RegularCustomer_customAjax',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, alert, asyncFormSubmit) {
+], function ($, asyncFormSubmit) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
@@ -55,12 +54,6 @@ define([
                 .always(this.ajaxComplete.bind(this));
         },
 
-        ajaxComplete: function () {
-            if (this.options.isModal) {
-                $(this.element).modal('closeModal');
-            }
-        },
-
         alreadyRequestedAction: function () {
             //hide button and form, show message
             console.log('hide this func');
@@ -70,6 +63,12 @@ define([
             let message = $.mage.__('Already requested!');
 
             $('.customer_request_block').after('<div class=\'message-notice notice message\'>' + message + '</div>');
+        },
+
+        ajaxComplete: function () {
+            if (this.options.isModal) {
+                $(this.element).modal('closeModal');
+            }
         },
 
         ajaxCheck: function () {
@@ -94,10 +93,7 @@ define([
                 },
 
                 error: function () {
-                    alert({
-                        title: $.mage.__('Error'),
-                        content: $.mage.__('We can\'t check if it has beent requested.')
-                    });
+                    console.log($.mage.__('We can\'t check if it has beent requested.'));
                 }
             });
         }
@@ -105,4 +101,5 @@ define([
     });
 
     return $.OlenaK.regularCustomer_form;
+
 });
