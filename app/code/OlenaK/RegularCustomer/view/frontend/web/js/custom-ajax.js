@@ -1,14 +1,12 @@
 define([
     'jquery',
     'Magento_Ui/js/modal/alert',
-    'Magento_Ui/js/modal/modal',
-    'mage/translate',
-    'mage/cookies'
+    'mage/translate'
 ], function ($, alert) {
     'use strict';
 
     return function (action, formData) {
-        $.ajax({
+        return $.ajax({
             url: action,
             data: formData,
             processData: false,
@@ -34,6 +32,10 @@ define([
                     title: $.mage.__('Error'),
                     content: $.mage.__('Your request can\'t be sent. Please, contact us if you see this message.')
                 });
+            },
+
+            complete: function () {
+                $('body').trigger('processStop');
             }
         });
     };

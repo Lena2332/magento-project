@@ -16,9 +16,10 @@ define([
         },
 
         _create: function () {
-            $(this.element).on('submit.olenak_personal_disc_form', this.sendRequest.bind(this));
-
+            //Check if it product was used in requests
             this.ajaxCheck();
+
+            $(this.element).on('submit.olenak_personal_disc_form', this.sendRequest.bind(this));
 
             if (this.options.isModal) {
                 $(this.element).modal({
@@ -37,7 +38,6 @@ define([
             if (!this.validate()) {
                 return;
             }
-            console.log('start');
             this.ajaxSubmit();
         },
 
@@ -50,18 +50,26 @@ define([
 
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
-            let action = this.options.action;
-
-            asyncFormSubmit(action, formData);
-            $(document).on('ajaxComplete', this.ajaxComplete().bind(this));
+            asyncFormSubmit(this.options.action, formData)
+                .done(this.alreadyRequestedAction.bind(this))
+                .always(this.ajaxComplete.bind(this));
         },
 
         ajaxComplete: function () {
             if (this.options.isModal) {
                 $(this.element).modal('closeModal');
             }
-            $('body').trigger('processStop');
-            this.alreadyRequestedAction();
+        },
+
+        alreadyRequestedAction: function () {
+            //hide button and form, show message
+            console.log('hide this func');
+            $(this.element).hide();
+            $(document).trigger('olenak_regular_customer_hide_button');
+
+            let message = $.mage.__('Already requested!');
+
+            $('.customer_request_block').after('<div class=\'message-notice notice message\'>' + message + '</div>');
         },
 
         ajaxCheck: function () {
@@ -80,6 +88,7 @@ define([
 
                 success: function (response) {
                     if (response.isUsed) {
+                        console.log('hide this');
                         this.alreadyRequestedAction();
                     }
                 },
@@ -91,16 +100,8 @@ define([
                     });
                 }
             });
-        },
-
-        alreadyRequestedAction: function () {
-            //hide button and form, show message
-            $(this.element).hide();
-            $(document).trigger('olenak_regular_customer_hide_button');
-            let message = $.mage.__('Already requested!');
-
-            $('.customer_request_block').after('<div class=\'message-notice notice message\'>' + message + '</div>');
         }
+
     });
 
     return $.OlenaK.regularCustomer_form;
