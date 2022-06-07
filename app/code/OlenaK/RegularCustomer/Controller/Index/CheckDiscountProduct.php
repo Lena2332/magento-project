@@ -45,7 +45,7 @@ class CheckDiscountProduct implements
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @param \Magento\Customer\Model\Session $customerSession
      */
-    public function __construct (
+    public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         DiscountRequestProvider $discountRequestProvider,
