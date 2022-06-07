@@ -45,7 +45,7 @@ return [
             'password' => '',
             'timeout' => '2.5',
             'persistent_identifier' => '',
-            'database' => '2',
+            'database' => '3',
             'compression_threshold' => '2048',
             'compression_library' => 'gzip',
             'log_level' => '4',
