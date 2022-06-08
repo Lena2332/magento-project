@@ -16,7 +16,7 @@ return [
         'table_prefix' => 'm2_',
         'connection' => [
             'default' => [
-                'host' => 'mysql',
+                'host' => 'localhost',
                 'dbname' => 'olena_kupriiets_magento_dev',
                 'username' => 'olena_kupriiets_magento_dev_user',
                 'password' => 'mfj@i23l-OSz:s345:v3+4@cdkswsdf',
