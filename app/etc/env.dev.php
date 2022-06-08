@@ -40,7 +40,7 @@ return [
     'session' => [
         'save' => 'redis',
         'redis' => [
-            'host' => 'redis',
+            'host' => '127.0.0.1',
             'port' => '6379',
             'password' => '',
             'timeout' => '2.5',
