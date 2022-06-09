@@ -49,25 +49,25 @@ deployment:
           repeat: 10
     syncronize:
       commands:
-        - command: 'mkdir -p generated/code/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/generated/code/ generated/code/'
+        - command: 'mkdir -p generated/code/ ; rsync -r --delete /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/generated/code/ generated/code/'
           executor: shell
-        - command: 'mkdir -p generated/metadata/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/generated/metadata/ generated/metadata/'
+        - command: 'mkdir -p generated/metadata/ ; rsync -r --delete /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/generated/metadata/ generated/metadata/'
           executor: shell
         # Clean DI cache that can be stored in FS and in Redis
         - command: 'bin/magento cache:clean'
           executor: php
         - command: 'bin/magento cache:flush'
           executor: php
-        - command: 'mkdir -p var/view_preprocessed/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/var/view_preprocessed/ var/view_preprocessed/'
+        - command: 'mkdir -p var/view_preprocessed/ ; rsync -r --delete /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/var/view_preprocessed/ var/view_preprocessed/'
           executor: shell
-        - command: 'mkdir -p pub/static/frontend/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/frontend/ pub/static/frontend/'
+        - command: 'mkdir -p pub/static/frontend/ ; rsync -r --delete /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/pub/static/frontend/ pub/static/frontend/'
           executor: shell
-        - command: 'mkdir -p pub/static/adminhtml/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/adminhtml/ pub/static/adminhtml/'
+        - command: 'mkdir -p pub/static/adminhtml/ ; rsync -r --delete /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/pub/static/adminhtml/ pub/static/adminhtml/'
           executor: shell
         - command: 'rm -rf pub/static/_cache/'
           executor: shell
           repeat: 3
-        - command: 'rsync /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/deployed_version.txt pub/static/'
+        - command: 'rsync /home/www-data/domains/olena-kupriiets-magento-local.allbugs.info/build_system/pub/static/deployed_version.txt pub/static/'
           executor: shell
         - command: 'bin/magento deploy:mode:set production --skip-compilation'
           executor: php

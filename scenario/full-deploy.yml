@@ -29,7 +29,7 @@ deployment:
   description: 'Pull changes, install dependencies, compile code and static files.'
   # Database backup configuration
   database:
-    backup: true
+    backup: false
     backup-limit: 3
     backup-additional-parameters: '--no-tablespaces --insert-ignore --skip-lock-tables --single-transaction=TRUE'
   stage:
@@ -39,12 +39,12 @@ deployment:
           executor: php
     deploy:
       commands:
-        - command: 'git pull {branch}'
-          executor: shell
+#        - command: 'git pull {branch}'
+#          executor: shell
         - command: >
             sed -i "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
           executor: shell
-        - command: 'install --no-dev'
+        - command: 'install' #--no-dev
           executor: composer
         - command: 'git checkout .gitignore pub/.htaccess'
           executor: shell
