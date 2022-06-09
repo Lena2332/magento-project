@@ -56,7 +56,7 @@ deployment:
           repeat: 7
         - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a frontend --theme Magento/luma --jobs=2'
           executor: php
-        - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a frontend --theme DVCampus/luma --jobs=2'
+        - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a frontend --theme OlenaK/luma --jobs=2'
           executor: php
         - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a adminhtml --jobs=2'
           executor: php
