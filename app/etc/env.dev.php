@@ -65,7 +65,7 @@ return [
             'default' => [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
-                    'server' => 'redis',
+                    'server' => '127.0.0.1',
                     'database' => '0',
                     'port' => '6379'
                 ],
@@ -74,7 +74,7 @@ return [
             'page_cache' => [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
-                    'server' => 'redis',
+                    'server' => '127.0.0.1',
                     'port' => '6379',
                     'database' => '1',
                     'compress_data' => '0'
@@ -111,7 +111,7 @@ return [
         'vertex' => 1
     ],
     'downloadable_domains' => [
-        'olena-kupriiets-magento.local'
+        'olena-kupriiets-magento-local.allbugs.info'
     ],
     'install' => [
         'date' => 'Thu, 05 May 2022 08:42:40 +0000'
