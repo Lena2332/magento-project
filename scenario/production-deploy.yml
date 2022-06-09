@@ -1,0 +1,83 @@
+version: '1.4.0'
+
+# Tool Configuration
+configuration:
+  application: magento2
+  application-detect:
+    - app/etc/env.php
+    - app/etc/config.php
+    - bin/magento
+  database-backup-folder: var/db_backups/
+  binary:
+    php: php
+    composer: composer
+  branch: 'origin master'
+  timeout: 30
+  timeout-unit: m # s, m, h
+  overtime: notify # continue, notify, abort
+  notification:
+    enabled: false
+    slack-token: ''
+    slack-channels:
+      - ''
+    mentions: ''
+
+# Deployment Configuration
+deployment:
+  code: 'production-deploy'
+  name: 'Zero-downtime deploy from build system'
+  description: 'Pull changes, install dependencies, copy files from the build system.'
+  # Database backup configuration
+  database:
+    backup: true
+    backup-limit: 3
+    backup-additional-parameters: '--no-tablespaces --insert-ignore --skip-lock-tables --single-transaction=TRUE'
+  stage:
+    upgrade:
+      commands:
+        - command: 'git pull {branch}'
+          executor: shell
+        - command: >
+            sed -i "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
+          executor: shell
+        - command: 'install --no-dev'
+          executor: composer
+        - command: 'git checkout .gitignore pub/.htaccess'
+          executor: shell
+        - command: 'bin/magento setup:upgrade'
+          executor: php
+          repeat: 10
+    syncronize:
+      commands:
+        - command: 'mkdir -p generated/code/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/generated/code/ generated/code/'
+          executor: shell
+        - command: 'mkdir -p generated/metadata/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/generated/metadata/ generated/metadata/'
+          executor: shell
+        # Clean DI cache that can be stored in FS and in Redis
+        - command: 'bin/magento cache:clean'
+          executor: php
+        - command: 'bin/magento cache:flush'
+          executor: php
+        - command: 'mkdir -p var/view_preprocessed/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/var/view_preprocessed/ var/view_preprocessed/'
+          executor: shell
+        - command: 'mkdir -p pub/static/frontend/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/frontend/ pub/static/frontend/'
+          executor: shell
+        - command: 'mkdir -p pub/static/adminhtml/ ; rsync -r --delete /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/adminhtml/ pub/static/adminhtml/'
+          executor: shell
+        - command: 'rm -rf pub/static/_cache/'
+          executor: shell
+          repeat: 3
+        - command: 'rsync /home/www-data/domains/dv-campus-2021-2022-magento-local.allbugs.info/build_system/pub/static/deployed_version.txt pub/static/'
+          executor: shell
+        - command: 'bin/magento deploy:mode:set production --skip-compilation'
+          executor: php
+    post-deploy:
+      commands:
+        - command: 'bin/magento cache:clean'
+          executor: php
+        - command: 'bin/magento cache:flush'
+          executor: php
+#        - command: 'bin/magento indexer:set-mode schedule'
+#          executor: php
+#        - command: 'bin/magento indexer:set-mode realtime customer_grid'
+#          executor: php

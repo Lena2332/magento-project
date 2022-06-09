@@ -1,0 +1,76 @@
+version: '1.4.0'
+
+# Tool Configuration
+configuration:
+  application: magento2
+  application-detect:
+    - app/etc/env.php
+    - app/etc/config.php
+    - bin/magento
+  database-backup-folder: var/db_backups/
+  binary:
+    php: php
+    composer: composer
+  branch: 'origin master'
+  timeout: 30
+  timeout-unit: m # s, m, h
+  overtime: notify # continue, notify, abort
+  notification:
+    enabled: false
+    slack-token: ''
+    slack-channels:
+      - ''
+    mentions: ''
+
+# Deployment Configuration
+deployment:
+  code: 'full-deploy'
+  name: 'Full deploy with maintenance'
+  description: 'Pull changes, install dependencies, compile code and static files.'
+  # Database backup configuration
+  database:
+    backup: true
+    backup-limit: 3
+    backup-additional-parameters: '--no-tablespaces --insert-ignore --skip-lock-tables --single-transaction=TRUE'
+  stage:
+    prepare:
+      commands:
+        - command: 'bin/magento maintenance:enable'
+          executor: php
+    deploy:
+      commands:
+        - command: 'git pull {branch}'
+          executor: shell
+        - command: >
+            sed -i "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
+          executor: shell
+        - command: 'install --no-dev'
+          executor: composer
+        - command: 'git checkout .gitignore pub/.htaccess'
+          executor: shell
+        - command: 'bin/magento setup:upgrade'
+          executor: php
+          repeat: 7
+        - command: 'bin/magento setup:di:compile'
+          executor: php
+          repeat: 7
+        - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a frontend --theme Magento/luma --jobs=2'
+          executor: php
+        - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a frontend --theme DVCampus/luma --jobs=2'
+          executor: php
+        - command: 'bin/magento setup:static-content:deploy en_US uk_UA -f -a adminhtml --jobs=2'
+          executor: php
+        - command: 'bin/magento deploy:mode:set production --skip-compilation'
+          executor: php
+    post-deploy:
+      commands:
+        - command: 'bin/magento cache:clean'
+          executor: php
+        - command: 'bin/magento cache:flush'
+          executor: php
+        #        - command: 'bin/magento indexer:set-mode schedule'
+        #          executor: php
+        #        - command: 'bin/magento indexer:set-mode realtime customer_grid'
+        #          executor: php
+        - command: 'bin/magento maintenance:disable'
+          executor: php
