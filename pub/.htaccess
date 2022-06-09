@@ -122,6 +122,12 @@
     Options +FollowSymLinks
     RewriteEngine on
 
+    # Development
+    SetEnvIf Host .*olena-kupriiets-magento-local.allbugs.info.* MAGE_RUN_CODE=default
+    SetEnvIf Host .*olena-kupriiets-magento-local.allbugs.info.* MAGE_RUN_TYPE=store
+    SetEnvIf Host .*olena-kupriiets-magento-us.allbugs.info.* MAGE_RUN_CODE=us_store_view
+    SetEnvIf Host .*olena-kupriiets-magento-us.allbugs.info.* MAGE_RUN_TYPE=store
+
     SetEnvIf Host .*olena-kupriiets-magento.local.* MAGE_RUN_CODE=default
     SetEnvIf Host .*olena-kupriiets-magento.local.* MAGE_RUN_TYPE=store
     SetEnvIf Host .*olena-kupriiets-magento.us.* MAGE_RUN_CODE=us_store_view
