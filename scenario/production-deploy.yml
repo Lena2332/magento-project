@@ -38,7 +38,7 @@ deployment:
         - command: 'git pull {branch}'
           executor: shell
         - command: >
-            sed -i "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
+            sed -i --follow-symlinks "s/'MAGE_MODE' => 'production',/'MAGE_MODE' => 'default',/g" app/etc/env.php
           executor: shell
         - command: 'install --no-dev'
           executor: composer
