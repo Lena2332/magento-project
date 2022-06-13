@@ -1,11 +1,10 @@
 define([
     'jquery',
-    'Magento_Customer/js/customer-data',
     'OlenaK_RegularCustomer_customAjax',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, customerData, asyncFormSubmit) {
+], function ($, asyncFormSubmit) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
