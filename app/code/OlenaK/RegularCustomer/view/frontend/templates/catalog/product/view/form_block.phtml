@@ -61,10 +61,10 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
                        value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
                 />
                 <button type="submit"
-                        title="<?= $escaper->escapeHtmlAttr(__('Send your request')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Apply for discount')) ?>"
                         class="action submit primary"
                 >
-                    <span><?= $escaper->escapeHtml(__('Send your request')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Apply for discount')) ?></span>
                 </button>
             </div>
         </div>
