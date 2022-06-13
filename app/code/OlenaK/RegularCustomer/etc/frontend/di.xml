@@ -20,4 +20,11 @@
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="regular-customer" xsi:type="string">OlenaK\RegularCustomer\CustomerData\RegularCustomer</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

@@ -1,10 +1,11 @@
 define([
     'jquery',
     'OlenaK_RegularCustomer_customAjax',
+    'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, asyncFormSubmit) {
+], function ($, asyncFormSubmit, customerData) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
@@ -27,6 +28,11 @@ define([
 
                 $(document).on('olenak_regular_customer_form_open', this.openModal.bind(this));
             }
+
+            console.log(customerData.get('regular-customer')());
+            customerData.get('regular-customer').subscribe(function (value) {
+                console.log(value);
+            });
         },
 
         openModal: function () {
