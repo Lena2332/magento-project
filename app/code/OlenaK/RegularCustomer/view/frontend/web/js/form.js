@@ -1,10 +1,11 @@
 define([
     'jquery',
+    'Magento_Customer/js/customer-data',
     'OlenaK_RegularCustomer_customAjax',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, asyncFormSubmit) {
+], function ($, customerData, asyncFormSubmit) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
@@ -56,7 +57,6 @@ define([
 
         alreadyRequestedAction: function () {
             //hide button and form, show message
-            console.log('hide this func');
             $(this.element).hide();
             $(document).trigger('olenak_regular_customer_hide_button');
 
@@ -87,7 +87,6 @@ define([
 
                 success: function (response) {
                     if (response.isUsed) {
-                        console.log('hide this');
                         this.alreadyRequestedAction();
                     }
                 },
@@ -101,5 +100,4 @@ define([
     });
 
     return $.OlenaK.regularCustomer_form;
-
 });
