@@ -2,12 +2,38 @@ define([
     'jquery',
     'OlenaK_RegularCustomer_customAjax',
     'Magento_Customer/js/customer-data',
+    'uiComponent',
+    'ko',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, asyncFormSubmit, customerData) {
+], function ($, asyncFormSubmit, customerData, Component, ko) {
     'use strict';
 
+    return Component.extend({
+        defaults: {
+            action: '',
+            customerName: '',
+            customerEmail: '',
+            isLoggedIn: !!customerData.get('regular-customer')().isLoggedIn,
+            isModal:0,
+            productId:0,
+            productIds:[],
+            template: 'OlenaK_RegularCustomer/form'
+        },
+
+        initialize: function () {
+            this._super();
+
+            console.log(this);
+        },
+
+        sendRequest: function () {
+            console.log('form works');
+        }
+    });
+
+    //------
     $.widget('OlenaK.regularCustomer_form', {
         options: {
             action: '',
@@ -102,5 +128,5 @@ define([
         }
     });
 
-    return $.OlenaK.regularCustomer_form;
+    //return $.OlenaK.regularCustomer_form;
 });

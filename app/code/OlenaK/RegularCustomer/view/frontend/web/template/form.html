@@ -1,0 +1,73 @@
+<form class="form olenak-personal-discount-form"
+      action="/errors/404.php"
+      onsubmit="return false;"
+      method="post"
+      data-bind="submit: sendRequest"
+>
+<fieldset class="fieldset">
+    <div class="field name required">
+        <label class="label" for="olenak-customerName">
+            <span translate="'Your name'"></span>
+        </label>
+        <div class="control">
+            <input  class="input-text"
+                data-bind="
+                    value: customerName,
+                    attr: {
+                        title: $t('Your name'),
+                        placeholder: $t('Your name'),
+                    }
+               "
+               data-validate="{ required:true }"
+               id="olenak-customerName"
+               name="name"
+               type="text"
+            />
+        </div>
+    </div>
+    <div class="field email required">
+        <label class="label" for="olenak-customerEmail">
+            <span translate="'Your email'"></span>
+        </label>
+        <div class="control">
+            <input class="input-text"
+                data-bind="
+                      value: customerEmail,
+                      attr: {
+                          title: $t('Your email'),
+                          placeholder: $t('Your email'),
+                      }
+                "
+                data-validate="{ required:true, validate-email:true }"
+                id="olenak-customerEmail"
+                name="email"
+                type="email"
+            />
+        </div>
+    </div>
+</fieldset>
+<div class="actions-toolbar">
+    <div class="primary">
+        <!--
+        <input type="text"
+               name="product_id"
+               value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
+        />
+        <input type="hidden"
+               name="product_name"
+               value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
+        />
+        -->
+        <button class="action submit primary"
+                type="submit"
+                data-bind="
+                      attr: {
+                          title: $t('Apply for discount'),
+                      }
+                   "
+        >
+            <span translate="'Apply for discount'"></span>
+        </button>
+    </div>
+</div>
+</form>
