@@ -11,8 +11,7 @@ define([
     $.widget('OlenaK.regularCustomer_form', {
         options: {
             action: '',
-            isModal: 0,
-            actionCheck: ''
+            isModal: 0
         },
 
         _create: function () {
