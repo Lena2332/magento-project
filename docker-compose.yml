@@ -46,7 +46,7 @@ services:
       - "host.docker.internal:172.17.0.1"
     links:
 #      - memcached
-#      - redis
+      - redis
       - elasticsearch
     external_links:
       - mysql80:mysql
@@ -72,12 +72,12 @@ services:
 #  olena-kupriiets-magento-local-sync:
 #    external: true
 
-#  redis:
-#    image: redis:latest
-#    network_mode: bridge
-#    labels:
-#      - traefik.enable=false
-#    restart: always
+  redis:
+    image: redis:latest
+    network_mode: bridge
+    labels:
+      - traefik.enable=false
+    restart: always
 
 #  memcached:
 #    image: 'memcached:1.5'
