@@ -9,8 +9,6 @@ define([
         return $.ajax({
             url: action,
             data: formData,
-            processData: false,
-            contentType: false,
             type: 'post',
             dataType: 'json',
 

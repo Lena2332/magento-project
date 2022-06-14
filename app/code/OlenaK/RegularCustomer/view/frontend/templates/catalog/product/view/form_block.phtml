@@ -20,9 +20,9 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
                 "components": {
                     "regularCustomrtRequestForm": {
                         "component": "OlenaK_RegularCustomer_form",
-                        "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
-                        "productId": <?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>,
-                        "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
+                        "action": "<?= $escaper->escapeJs($block->getData('request_submit_url')) ?>",
+                        "productId": <?= ($product) ? (int) $product->getId() : '' ?>,
+                        "isModal": <?= $escaper->escapeJs($isModal) ?>
                     }
                 }
             }

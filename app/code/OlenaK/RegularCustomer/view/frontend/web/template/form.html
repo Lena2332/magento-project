@@ -2,7 +2,10 @@
       action="/errors/404.php"
       onsubmit="return false;"
       method="post"
-      data-bind="submit: sendRequest"
+      data-bind="
+         afterRender: initModal,
+         submit: sendRequest
+      "
 >
 <fieldset class="fieldset">
     <div class="field name required">
@@ -38,7 +41,7 @@
                           placeholder: $t('Your email'),
                       }
                 "
-                data-validate="{ required:true, validate-email:true }"
+                data-validate="{ required:true, 'validate-email':true }"
                 id="olenak-customerEmail"
                 name="email"
                 type="email"
