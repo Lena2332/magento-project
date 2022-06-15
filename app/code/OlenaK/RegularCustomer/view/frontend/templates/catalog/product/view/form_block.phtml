@@ -16,7 +16,6 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
           method="post"
           data-mage-init='{"OlenaK_RegularCustomer_form": {
                                 "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
-                                "actionCheck": "<?= $escaper->escapeHtmlAttr($block->getData('request_check_url')) ?>",
                                 "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
                             }
           }'
@@ -61,10 +60,10 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
                        value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
                 />
                 <button type="submit"
-                        title="<?= $escaper->escapeHtmlAttr(__('Send your request')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Apply for discount')) ?>"
                         class="action submit primary"
                 >
-                    <span><?= $escaper->escapeHtml(__('Send your request')) ?></span>
+                    <span><?= $escaper->escapeHtml(__('Apply for discount')) ?></span>
                 </button>
             </div>
         </div>

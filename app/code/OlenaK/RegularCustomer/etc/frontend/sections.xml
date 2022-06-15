@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <!-- Important! Front name goes here, not Route ID! -->
+    <!-- @TODO: ideally, we need to allow editing and cancelling requests in My Account. Must invalidate cache as well -->
+    <action name="regular-customer/index/request">
+        <section name="regular-customer"/>
+    </action>
+</config>

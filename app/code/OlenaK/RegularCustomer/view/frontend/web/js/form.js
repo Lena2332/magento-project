@@ -1,23 +1,20 @@
 define([
     'jquery',
     'OlenaK_RegularCustomer_customAjax',
+    'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/modal',
     'mage/translate',
     'mage/cookies'
-], function ($, asyncFormSubmit) {
+], function ($, asyncFormSubmit, customerData) {
     'use strict';
 
     $.widget('OlenaK.regularCustomer_form', {
         options: {
             action: '',
-            isModal: 0,
-            actionCheck: ''
+            isModal: 0
         },
 
         _create: function () {
-            //Check if it product was used in requests
-            this.ajaxCheck();
-
             $(this.element).on('submit.olenak_personal_disc_form', this.sendRequest.bind(this));
 
             if (this.options.isModal) {
@@ -26,6 +23,40 @@ define([
                 });
 
                 $(document).on('olenak_regular_customer_form_open', this.openModal.bind(this));
+            }
+
+            this.updateFormState(customerData.get('regular-customer')());
+            customerData.get('regular-customer').subscribe(this.updateFormState.bind(this));
+        },
+
+        /**
+         * Pre-fill form fields with data, hide fields if needed.
+         */
+        updateFormState: function (personalInfo) {
+            //Set name and email if customer send request or logged in
+            let emailField = $(this.element).find('input[name = "email"]');
+
+            if (personalInfo.email !== undefined) {
+                emailField.val(personalInfo.email);
+            }
+
+            let nameField =  $(this.element).find('input[name = "name"]');
+
+            if (personalInfo.name !== undefined) {
+                nameField.val(personalInfo.name);
+            }
+
+            //Hide fields if customer is logged
+            if (personalInfo.isLoggedIn) {
+                emailField.attr('type', 'hidden');
+                nameField.attr('type', 'hidden').parents('fieldset').hide();
+            }
+
+            //Hide button if product has been requested
+            let productId =  Number($(this.element).find('input[name = "product_id"]').val());
+
+            if ($.inArray(productId, personalInfo.productIds) !== -1) {
+                this.alreadyRequestedAction();
             }
         },
 
@@ -50,7 +81,6 @@ define([
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('isAjax', 1);
             asyncFormSubmit(this.options.action, formData)
-                .done(this.alreadyRequestedAction.bind(this))
                 .always(this.ajaxComplete.bind(this));
         },
 
@@ -68,34 +98,7 @@ define([
             if (this.options.isModal) {
                 $(this.element).modal('closeModal');
             }
-        },
-
-        ajaxCheck: function () {
-            let productId = $(this.element).find('input[name = "product_id"]').val();
-
-            $.ajax({
-                url: this.options.actionCheck,
-                data: {
-                    product_id: productId,
-                    form_key: $.mage.cookies.get('form_key'),
-                    isAjax: 1
-                },
-                type: 'post',
-                dataType: 'json',
-                context: this,
-
-                success: function (response) {
-                    if (response.isUsed) {
-                        this.alreadyRequestedAction();
-                    }
-                },
-
-                error: function () {
-                    console.log($.mage.__('We can\'t check if it has beent requested.'));
-                }
-            });
         }
-
     });
 
     return $.OlenaK.regularCustomer_form;
