@@ -25,10 +25,6 @@
                                   path="regular-customer/index/request"
                                   xsi:type="url"
                         />
-                        <argument name="request_check_url"
-                                  path="regular-customer/index/checkdiscountproduct"
-                                  xsi:type="url"
-                        />
                         <argument name="product"
                                   helper="Magento\Catalog\Helper\Data::getProduct"
                                   xsi:type="helper"

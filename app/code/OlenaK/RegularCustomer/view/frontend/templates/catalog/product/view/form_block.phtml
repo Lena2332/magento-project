@@ -9,63 +9,24 @@ $product = $block->getData('product');
 $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0;
 // @TODO add customer name and email to the field
 ?>
-<div class="dv-campus-personal-discount-request">
-    <form class="form olenak-personal-discount-form"
-          action="/errors/404.php"
-          onsubmit="return false;"
-          method="post"
-          data-mage-init='{"OlenaK_RegularCustomer_form": {
-                                "action": "<?= $escaper->escapeHtmlAttr($block->getData('request_submit_url')) ?>",
-                                "isModal": <?= $escaper->escapeHtmlAttr($isModal) ?>
-                            }
-          }'
-
-    >
-        <fieldset class="fieldset">
-            <div class="field name required">
-                <label class="label" for="name">
-                    <span><?= $escaper->escapeHtml(__('Your name')) ?></span>
-                </label>
-                <div class="control">
-                    <input name="name"
-                           title="<?= $escaper->escapeHtmlAttr(__('Your name')) ?>"
-                           class="input-text"
-                           type="text"
-                           data-validate="{required:true}"
-                    />
-                </div>
-            </div>
-            <div class="field email required">
-                <label class="label" for="email">
-                    <span><?= $escaper->escapeHtml(__('Your email')) ?></span>
-                </label>
-                <div class="control">
-                    <input name="email"
-                           title="<?= $escaper->escapeHtmlAttr(__('Your email')) ?>"
-                           class="input-text"
-                           type="email"
-                           data-validate="{required:true, 'validate-email':true}"
-                    />
-                </div>
-            </div>
-        </fieldset>
-        <div class="actions-toolbar">
-            <div class="primary">
-                <input type="hidden"
-                       name="product_id"
-                       value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
-                />
-                <input type="hidden"
-                       name="product_name"
-                       value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
-                />
-                <button type="submit"
-                        title="<?= $escaper->escapeHtmlAttr(__('Apply for discount')) ?>"
-                        class="action submit primary"
-                >
-                    <span><?= $escaper->escapeHtml(__('Apply for discount')) ?></span>
-                </button>
-            </div>
-        </div>
-    </form>
+<div class="olenak-personal-discount-request-formp" data-bind="scope:'regularCustomerRequestForm'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "regularCustomerRequestForm": {
+                        "component": "OlenaK_RegularCustomer_form",
+                        "action": "<?= $escaper->escapeJs($block->getData('request_submit_url')) ?>",
+                        "productId": <?= ($product) ? (int) $product->getId() : 0 ?>,
+                        "productName": "<?= ($product) ? $escaper->escapeJs($product->getName()) : '' ?>",
+                        "isModal": <?= $escaper->escapeJs($isModal) ?>
+                    }
+                }
+            }
+        }
+    }
+</script>
+
