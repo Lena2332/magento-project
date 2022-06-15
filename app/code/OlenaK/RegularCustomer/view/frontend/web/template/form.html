@@ -4,7 +4,8 @@
       method="post"
       data-bind="
          afterRender: initModal,
-         submit: sendRequest
+         submit: sendRequest,
+         visible: !formSubmitDeniedMessage()
       "
 >
 <fieldset class="fieldset">
@@ -51,16 +52,6 @@
 </fieldset>
 <div class="actions-toolbar">
     <div class="primary">
-        <!--
-        <input type="text"
-               name="product_id"
-               value="<?= ($product) ? $escaper->escapeHtmlAttr((int) $product->getId()) : '' ?>"
-        />
-        <input type="hidden"
-               name="product_name"
-               value="<?= ($product) ? $escaper->escapeHtmlAttr((string) $product->getName()) : '' ?>"
-        />
-        -->
         <button class="action submit primary"
                 type="submit"
                 data-bind="
@@ -74,3 +65,6 @@
     </div>
 </div>
 </form>
+<div class="message-info info message" data-bind="visible: formSubmitDeniedMessage()">
+    <div data-bind="text: formSubmitDeniedMessage()"></div>
+</div>

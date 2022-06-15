@@ -22,6 +22,7 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
                         "component": "OlenaK_RegularCustomer_form",
                         "action": "<?= $escaper->escapeJs($block->getData('request_submit_url')) ?>",
                         "productId": <?= ($product) ? (int) $product->getId() : '' ?>,
+                        "productName": "<?= ($product) ? $escaper->escapeJs($product->getName()) : '' ?>",
                         "isModal": <?= $escaper->escapeJs($isModal) ?>
                     }
                 }
