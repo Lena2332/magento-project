@@ -9,8 +9,7 @@ $product = $block->getData('product');
 $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0;
 // @TODO add customer name and email to the field
 ?>
-
-<div class="olenak-personal-discount-request-formp" data-bind="scope:'regularCustomrtRequestForm'">
+<div class="olenak-personal-discount-request-formp" data-bind="scope:'regularCustomerRequestForm'">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
 <script type="text/x-magento-init">
@@ -18,10 +17,10 @@ $isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0
         "*": {
             "Magento_Ui/js/core/app": {
                 "components": {
-                    "regularCustomrtRequestForm": {
+                    "regularCustomerRequestForm": {
                         "component": "OlenaK_RegularCustomer_form",
                         "action": "<?= $escaper->escapeJs($block->getData('request_submit_url')) ?>",
-                        "productId": <?= ($product) ? (int) $product->getId() : '' ?>,
+                        "productId": <?= ($product) ? (int) $product->getId() : 0 ?>,
                         "productName": "<?= ($product) ? $escaper->escapeJs($product->getName()) : '' ?>",
                         "isModal": <?= $escaper->escapeJs($isModal) ?>
                     }
