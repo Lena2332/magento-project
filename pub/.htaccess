@@ -134,6 +134,7 @@
     SetEnvIf Host .*olena-kupriiets-magento-prod-us.allbugs.info.* MAGE_RUN_CODE=us_store_view
     SetEnvIf Host .*olena-kupriiets-magento-prod-us.allbugs.info.* MAGE_RUN_TYPE=store
 
+
 ############################################
 ## You can put here your magento root folder
 ## path relative to web root

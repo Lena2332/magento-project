@@ -17,9 +17,9 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'mysql',
-                'dbname' => 'olena_kupriiets_magento_dev',
-                'username' => 'olena_kupriiets_magento_dev_user',
-                'password' => 'mfj@i23l-OSz:s345:v3+4@cdkswsdf',
+                'dbname' => 'olena_kupriiets_magento_local',
+                'username' => 'olena_kupriiets_magento_local',
+                'password' => 'olena_kupriiets_magento_local',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
@@ -45,7 +45,7 @@ return [
             'password' => '',
             'timeout' => '2.5',
             'persistent_identifier' => '',
-            'database' => '2',
+            'database' => '3',
             'compression_threshold' => '2048',
             'compression_library' => 'gzip',
             'log_level' => '4',
@@ -66,20 +66,18 @@ return [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => 'redis',
-                    'database' => '0',
+                    'database' => '4',
                     'port' => '6379'
-                ],
-                'id_prefix' => '69d_'
+                ]
             ],
             'page_cache' => [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => 'redis',
                     'port' => '6379',
-                    'database' => '1',
+                    'database' => '5',
                     'compress_data' => '0'
-                ],
-                'id_prefix' => '69d_'
+                ]
             ]
         ],
         'allow_parallel_generation' => false
@@ -87,7 +85,7 @@ return [
     'lock' => [
         'provider' => 'db',
         'config' => [
-            'prefix' => ''
+            'prefix' => null
         ]
     ],
     'directories' => [
@@ -95,8 +93,8 @@ return [
     ],
     'cache_types' => [
         'config' => 1,
-        'layout' => 0,
-        'block_html' => 0,
+        'layout' => 1,
+        'block_html' => 1,
         'collections' => 1,
         'reflection' => 1,
         'db_ddl' => 1,
@@ -105,7 +103,7 @@ return [
         'customer_notification' => 1,
         'config_integration' => 1,
         'config_integration_api' => 1,
-        'full_page' => 0,
+        'full_page' => 1,
         'config_webservice' => 1,
         'translate' => 1,
         'vertex' => 1
