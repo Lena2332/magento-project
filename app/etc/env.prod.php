@@ -66,7 +66,7 @@ return [
                 'backend' => 'Magento\\Framework\\Cache\\Backend\\Redis',
                 'backend_options' => [
                     'server' => 'redis',
-                    'database' => '0',
+                    'database' => '4',
                     'port' => '6379'
                 ]
             ],
@@ -75,7 +75,7 @@ return [
                 'backend_options' => [
                     'server' => 'redis',
                     'port' => '6379',
-                    'database' => '1',
+                    'database' => '5',
                     'compress_data' => '0'
                 ]
             ]
@@ -109,9 +109,51 @@ return [
         'vertex' => 1
     ],
     'downloadable_domains' => [
-        'olena-kupriiets-magento.local'
+        'olena-kupriiets-magento-prod-local.allbugs.info'
     ],
     'install' => [
         'date' => 'Thu, 05 May 2022 08:42:40 +0000'
+    ],
+    'system' => [
+        'default' => [
+            'web' => [
+                'unsecure' => [
+                    'base_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/',
+                    'base_link_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/',
+                    'base_static_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/static/',
+                    'base_media_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/media/'
+                ],
+                'secure' => [
+                    'base_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/',
+                    'base_link_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/',
+                    'base_static_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/static/',
+                    'base_media_url' => 'https://olena-kupriiets-magento-prod-local.allbugs.info/media/'
+                ]
+            ]
+        ],
+        'websites' => [
+            'us_website' => [
+                'web' => [
+                    'unsecure' => [
+                        'base_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/',
+                        'base_link_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/',
+                        'base_static_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/static/',
+                        'base_media_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/media/'
+                    ],
+                    'secure' => [
+                        'base_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/',
+                        'base_link_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/',
+                        'base_static_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/static/',
+                        'base_media_url' => 'https://olena-kupriiets-magento-prod-us.allbugs.info/media/'
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'http_cache_hosts' => [
+        [
+            'host' => '127.0.0.1',
+            'port' => '6081'
+        ]
     ]
 ];
