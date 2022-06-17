@@ -27,10 +27,10 @@ class CurrentProductUpdater implements \Magento\Framework\View\Layout\Argument\U
      */
     public function update($value): array
     {
-        $value['components']['personalDiscountRequest']['children']['personalDiscountRequestForm']['config']
+        $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
         ['productId'] = (int) $this->productHelper->getProduct()->getId();
 
-        $value['components']['personalDiscountRequest']['children']['personalDiscountRequestForm']['config']
+        $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
         ['productName'] = (string) $this->productHelper->getProduct()->getName();
 
         return $value;
