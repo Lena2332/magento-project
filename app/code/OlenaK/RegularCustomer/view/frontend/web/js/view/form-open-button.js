@@ -1,8 +1,10 @@
 define([
     'jquery',
+    'ko',
     'uiComponent',
-    'OlenaK_RegularCustomer_formSubmitRestriction'
-], function ($, Component, formRestriction) {
+    'OlenaK_RegularCustomer_formSubmitRestriction',
+    'OlenaK_RegularCustomer_form'
+], function ($, ko, Component, formRestriction) {
     'use strict';
 
     return Component.extend({
@@ -10,7 +12,21 @@ define([
             template: 'OlenaK_RegularCustomer/form-open-button'
         },
 
-        formSubmitIsRestricted: formRestriction.formSubmitDeniedMessage,
+        /**
+         * Initialize data links (listens/imports/exports/links)
+         * @returns {*}
+         */
+        initLinks: function () {
+            this._super();
+
+            // Check whether it is possible to open the modal - either form is modal or there are any other restrictions
+            this.canShowOpenModalButton = ko.computed(function () {
+                return this.isModal && !formRestriction.formSubmitDeniedMessage();
+            }.bind(this));
+
+            return this;
+        },
+
 
         /**
          * Generate event to open the form

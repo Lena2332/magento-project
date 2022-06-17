@@ -38,7 +38,7 @@ define([
         initObservable: function () {
             this._super();
 
-            this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds']);
+            this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds', 'productId']);
 
             this.formSubmitDeniedMessage = ko.computed(
                 function () {

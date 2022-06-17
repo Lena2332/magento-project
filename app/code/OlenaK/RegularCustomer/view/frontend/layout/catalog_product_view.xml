@@ -6,6 +6,17 @@
     <body>
         <referenceContainer name="product.info.main">
             <container name="olenak.regularcustomer.container.form" htmlClass="customer_request_block" htmlTag="div">
+                <block name="olenak.regularcustomer.title" class="Magento\Framework\View\Element\Template"
+                       template="OlenaK_RegularCustomer::catalog/product/view/title_form.phtml">
+                    <arguments>
+                        <argument name="title_txt" xsi:type="string">Loyalty program for Regular Customers</argument>
+                    </arguments>
+                </block>
+                <block name="olenak.regularcustomer.cmsblock" class="Magento\Cms\Block\BlockByIdentifier">
+                    <arguments>
+                        <argument name="identifier" xsi:type="string">cms_block_regular_customer</argument>
+                    </arguments>
+                </block>
                 <block class="OlenaK\RegularCustomer\Block\Product\View\ProductDiscountBlock"
                        name="olenak.regularcustomer.form.block"
                        template="OlenaK_RegularCustomer::catalog/product/view/form_block.phtml"
@@ -21,10 +32,6 @@
                                 <item name="regularCustomerRequest" xsi:type="array">
                                     <item name="component" xsi:type="string">uiCollection</item>
                                     <item name="children" xsi:type="array">
-                                        <item name="olenak.regularcustomer.title" xsi:type="array">
-                                            <item name="component" xsi:type="string">OlenaK_RegularCustomer_formTitle</item>
-                                            <item name="displayArea" xsi:type="string">olenaK_regularCustomer_formTitle</item>
-                                        </item>
                                         <item name="regularCustomerRequestForm" xsi:type="array">
                                             <item name="component" xsi:type="string">OlenaK_RegularCustomer_form</item>
                                             <item name="displayArea" xsi:type="string">olenaK_regularCustomer_form</item>
@@ -33,18 +40,19 @@
                                                       xsi:type="url"
                                                       path="regular-customer/index/request"
                                                 />
-                                                <!-- Choose either `updater` or `xsi:type="helper"` -->
                                                 <item name="productId" xsi:type="number">0</item>
                                                 <item name="productName" xsi:type="string">ProductName</item>
-                                                <!-- <item name="productId" xsi:type="helper" -->
-                                                <!-- helper="OlenaK\RegularCustomer\Helper\CurrentProduct::getCurrentProductId" -->
-                                                <!--  /> -->
                                                 <item name="isModal" xsi:type="boolean">1</item>
                                             </item>
                                         </item>
                                         <item name="olenak.regularcustomer.form.open.button" xsi:type="array">
                                             <item name="component" xsi:type="string">OlenaK_RegularCustomer_formOpenButton</item>
                                             <item name="displayArea" xsi:type="string">olenaK_regularCustomer_formOpenButton</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="imports" xsi:type="array">
+                                                    <item name="isModal" xsi:type="string">regularCustomerRequest.regularCustomerRequestForm:isModal</item>
+                                                </item>
+                                            </item>
                                         </item>
                                     </item>
                                 </item>
