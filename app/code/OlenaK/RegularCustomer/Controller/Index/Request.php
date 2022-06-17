@@ -145,8 +145,7 @@ class Request implements
 
             $isAdded = true;
             $message = __(
-                'You request for product %1 accepted for review!',
-                $this->request->getParam('product_name')
+                'You request for product accepted for review!'
             );
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

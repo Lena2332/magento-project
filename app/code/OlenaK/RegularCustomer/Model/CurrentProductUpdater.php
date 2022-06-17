@@ -30,9 +30,6 @@ class CurrentProductUpdater implements \Magento\Framework\View\Layout\Argument\U
         if ($this->productHelper->getProduct()) {
             $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
             ['productId'] = (int)$this->productHelper->getProduct()->getId();
-
-            $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
-            ['productName'] = (string)$this->productHelper->getProduct()->getName();
         }
 
         return $value;
