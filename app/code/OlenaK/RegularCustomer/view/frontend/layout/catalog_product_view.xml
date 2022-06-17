@@ -6,35 +6,52 @@
     <body>
         <referenceContainer name="product.info.main">
             <container name="olenak.regularcustomer.container.form" htmlClass="customer_request_block" htmlTag="div">
-                <block name="olenak.regularcustomer.title" class="Magento\Framework\View\Element\Template"
-                       template="OlenaK_RegularCustomer::catalog/product/view/title_form.phtml">
+                <block class="OlenaK\RegularCustomer\Block\Product\View\ProductDiscountBlock"
+                       name="olenak.regularcustomer.form.block"
+                       template="OlenaK_RegularCustomer::catalog/product/view/form_block.phtml"
+                       after="-"
+                >
                     <arguments>
-                        <argument name="title_txt" xsi:type="string">Loyalty program for Regular Customers</argument>
+                        <argument name="cache_lifetime" xsi:type="number">84600</argument>
+                        <argument name="jsLayout" xsi:type="array">
+                            <!-- Choose either `updater` or `xsi:type="helper"` -->
+                            <!-- "updater" can also be used with any argument, not just a jsLayout -->
+                            <updater>OlenaK\RegularCustomer\Model\CurrentProductUpdater</updater>
+                            <item name="components" xsi:type="array">
+                                <item name="regularCustomerRequest" xsi:type="array">
+                                    <item name="component" xsi:type="string">uiCollection</item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="olenak.regularcustomer.title" xsi:type="array">
+                                            <item name="component" xsi:type="string">OlenaK_RegularCustomer_formTitle</item>
+                                            <item name="displayArea" xsi:type="string">olenaK_regularCustomer_formTitle</item>
+                                        </item>
+                                        <item name="regularCustomerRequestForm" xsi:type="array">
+                                            <item name="component" xsi:type="string">OlenaK_RegularCustomer_form</item>
+                                            <item name="displayArea" xsi:type="string">olenaK_regularCustomer_form</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="action"
+                                                      xsi:type="url"
+                                                      path="regular-customer/index/request"
+                                                />
+                                                <!-- Choose either `updater` or `xsi:type="helper"` -->
+                                                <item name="productId" xsi:type="number">0</item>
+                                                <item name="productName" xsi:type="string">ProductName</item>
+                                                <!-- <item name="productId" xsi:type="helper" -->
+                                                <!-- helper="OlenaK\RegularCustomer\Helper\CurrentProduct::getCurrentProductId" -->
+                                                <!--  /> -->
+                                                <item name="isModal" xsi:type="boolean">1</item>
+                                            </item>
+                                        </item>
+                                        <item name="olenak.regularcustomer.form.open.button" xsi:type="array">
+                                            <item name="component" xsi:type="string">OlenaK_RegularCustomer_formOpenButton</item>
+                                            <item name="displayArea" xsi:type="string">olenaK_regularCustomer_formOpenButton</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
                     </arguments>
                 </block>
-                <block name="olenak.regularcustomer.cmsblock" class="Magento\Cms\Block\BlockByIdentifier">
-                    <arguments>
-                        <argument name="identifier" xsi:type="string">cms_block_regular_customer</argument>
-                    </arguments>
-                </block>
-                <block name="olenak.regularcustomer.form.block" class="OlenaK\RegularCustomer\Block\Product\View\ProductDiscountBlock"
-                       template="OlenaK_RegularCustomer::catalog/product/view/form_block.phtml">
-                    <arguments>
-                      <!--  <argument name="cache_lifetime" xsi:type="number">84600</argument> -->
-                        <argument name="request_submit_url"
-                                  path="regular-customer/index/request"
-                                  xsi:type="url"
-                        />
-                        <argument name="product"
-                                  helper="Magento\Catalog\Helper\Data::getProduct"
-                                  xsi:type="helper"
-                        />
-                        <argument name="is_modal" xsi:type="boolean">1</argument>
-                    </arguments>
-                </block>
-                <block name="olenak.regularcustomer.form.open.button"  class="Magento\Framework\View\Element\Template"
-                       template="OlenaK_RegularCustomer::catalog/product/view/form_open_button.phtml"
-                />
             </container>
         </referenceContainer>
     </body>

@@ -3,30 +3,15 @@
  * @var \Magento\Framework\View\Element\Template $block
  * @var \Magento\Framework\Escaper $escaper
  * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
- * @var \Magento\Catalog\Model\Product $product
  */
-$product = $block->getData('product');
-$isModal = ($block->hasData('is_modal')) ? (int) $block->getData('is_modal') : 0;
-// @TODO add customer name and email to the field
 ?>
-<div class="olenak-personal-discount-request-formp" data-bind="scope:'regularCustomerRequestForm'">
+<div class="olenak-personal-discount-request-formp" data-bind="scope: 'regularCustomerRequest'">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
 <script type="text/x-magento-init">
     {
         "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "regularCustomerRequestForm": {
-                        "component": "OlenaK_RegularCustomer_form",
-                        "action": "<?= $escaper->escapeJs($block->getData('request_submit_url')) ?>",
-                        "productId": <?= ($product) ? (int) $product->getId() : 0 ?>,
-                        "productName": "<?= ($product) ? $escaper->escapeJs($product->getName()) : '' ?>",
-                        "isModal": <?= $escaper->escapeJs($isModal) ?>
-                    }
-                }
-            }
+            "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
         }
     }
 </script>
-
