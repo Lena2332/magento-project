@@ -61,6 +61,10 @@
                                                 </item>
                                             </item>
                                         </item>
+                                        <item name="olenak.regularcustomer.form.login.button" xsi:type="array">
+                                            <item name="component" xsi:type="string">OlenaK_RegularCustomer_loginButton</item>
+                                            <item name="displayArea" xsi:type="string">olenaK_regularCustomer_loginButton</item>
+                                        </item>
                                     </item>
                                 </item>
                             </item>

@@ -37,13 +37,23 @@ define([
 
             this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds']);
 
+            this.customerMustLogIn = ko.computed(() => {
+                return !this.allowForGuests && !this.isLoggedIn();
+            });
+
+            formRestriction.customerMustLogIn(this.customerMustLogIn());
+
+            this.customerMustLogIn.subscribe((newValue) => {
+                formRestriction.customerMustLogIn(newValue);
+            });
+
             this.formSubmitDeniedMessage = ko.computed(
                 function () {
                     if (this.productIds().indexOf(this.productId) !== -1) {
                         return $.mage.__('Already requested!');
                     }
 
-                    if (!this.allowForGuests && !this.isLoggedIn()) {
+                    if (this.customerMustLogIn()) {
                         return $.mage.__('Please, log in to send a request!');
                     }
 

@@ -6,4 +6,7 @@
     <action name="regular-customer/index/request">
         <section name="regular-customer"/>
     </action>
+    <action name="customer/ajax/login">
+        <section name="regular-customer"/>
+    </action>
 </config>

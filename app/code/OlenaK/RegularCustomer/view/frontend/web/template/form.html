@@ -9,7 +9,7 @@
       "
 >
 <fieldset class="fieldset">
-    <div class="field name required">
+    <div class="field name required" data-bind="visible: !isLoggedIn">
         <label class="label" for="olenak-customerName">
             <span translate="'Your name'"></span>
         </label>
@@ -29,7 +29,7 @@
             />
         </div>
     </div>
-    <div class="field email required">
+    <div class="field email required" data-bind="visible: !isLoggedIn">
         <label class="label" for="olenak-customerEmail">
             <span translate="'Your email'"></span>
         </label>

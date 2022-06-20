@@ -4,6 +4,7 @@ define([
     'use strict';
 
     return {
-        formSubmitDeniedMessage: ko.observable()
+        formSubmitDeniedMessage: ko.observable(),
+        customerMustLogIn: ko.observable()
     };
 });
