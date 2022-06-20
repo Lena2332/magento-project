@@ -48,7 +48,6 @@
                                                       path="regular-customer/index/request"
                                                 />
                                                 <item name="productId" xsi:type="number">0</item>
-                                                <item name="productName" xsi:type="string">ProductName</item>
                                                 <item name="isModal" xsi:type="boolean">1</item>
                                             </item>
                                         </item>

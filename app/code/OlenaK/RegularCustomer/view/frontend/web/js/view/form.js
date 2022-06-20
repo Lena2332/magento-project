@@ -16,7 +16,6 @@ define([
             action: '',
             isModal: 0,
             productId: 0,
-            productName: '',
             template: 'OlenaK_RegularCustomer/form',
             listens: {
                 formSubmitDeniedMessage: 'updateFormSubmitRestrictions'
@@ -38,7 +37,7 @@ define([
         initObservable: function () {
             this._super();
 
-            this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds', 'productId']);
+            this.observe(['customerName', 'customerEmail', 'isLoggedIn', 'productIds']);
 
             this.formSubmitDeniedMessage = ko.computed(
                 function () {
@@ -111,7 +110,6 @@ define([
                 name: this.customerName(),
                 email: this.customerEmail(),
                 'product_id': this.productId,
-                'product_name': this.productName,
                 'form_key': $.mage.cookies.get('form_key'),
                 isAjax: 1
             };
