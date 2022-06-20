@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="OlenaK_Core::general"
+             title="OlenaK"
+             module="OlenaK_RegularCustomer"
+             sortOrder="100"
+             parent="Magento_Backend::marketing"
+             resource="OlenaK_Core::general"
+        />
+        <add id="OlenaK_RegularCustomer::listing"
+             title="Personal Discount"
+             translate="title"
+             module="OlenaK_RegularCustomer"
+             sortOrder="100"
+             parent="OlenaK_Core::general"
+             action="olenak_regular_customer/discount/index"
+             resource="OlenaK_RegularCustomer::listing"
+        />
+    </menu>
+</config>

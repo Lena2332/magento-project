@@ -16,6 +16,26 @@
                         </resource>
                     </resource>
                 </resource>
+                <resource id="Magento_Backend::marketing">
+                    <resource id="OlenaK_Core::general" title="OlenaK" sortOrder="100">
+                        <resource id="OlenaK_RegularCustomer::listing"
+                                  title="Personal Discount"
+                                  translate="title"
+                                  sortOrder="100"
+                        >
+                            <resource id="OlenaK_RegularCustomer::edit"
+                                      title="Edit"
+                                      translate="title"
+                                      sortOrder="10"
+                            />
+                            <resource id="OlenaK_RegularCustomer::delete"
+                                      title="Delete"
+                                      translate="title"
+                                      sortOrder="20"
+                            />
+                        </resource>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>
