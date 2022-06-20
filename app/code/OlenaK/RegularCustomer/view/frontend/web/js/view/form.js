@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'OlenaK_RegularCustomer_customAjax',
+    'OlenaK_RegularCustomer_ajaxFormSubmit',
     'Magento_Customer/js/customer-data',
     'uiComponent',
     'ko',
@@ -14,12 +14,10 @@ define([
     return Component.extend({
         defaults: {
             action: '',
+            allowForGuests: false,
             isModal: 0,
             productId: 0,
-            template: 'OlenaK_RegularCustomer/form',
-            listens: {
-                formSubmitDeniedMessage: 'updateFormSubmitRestrictions'
-            }
+            template: 'OlenaK_RegularCustomer/form'
         },
 
         customerName: '',
@@ -45,9 +43,18 @@ define([
                         return $.mage.__('Already requested!');
                     }
 
+                    if (!this.allowForGuests && !this.isLoggedIn()) {
+                        return $.mage.__('Please, log in to send a request!');
+                    }
+
                     return '';
                 }.bind(this)
             );
+
+            formRestriction.formSubmitDeniedMessage(this.formSubmitDeniedMessage());
+            this.formSubmitDeniedMessage.subscribe((newValue) => {
+                formRestriction.formSubmitDeniedMessage(newValue);
+            });
 
             return this;
         },

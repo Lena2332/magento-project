@@ -12,11 +12,20 @@ class CurrentProductUpdater implements \Magento\Framework\View\Layout\Argument\U
     private \Magento\Catalog\Helper\Data $productHelper;
 
     /**
-     * @param \Magento\Catalog\Helper\Data $productHelper
+     * @var \OlenaK\RegularCustomer\Model\Config $config
      */
-    public function __construct(\Magento\Catalog\Helper\Data $productHelper)
-    {
+    private \OlenaK\RegularCustomer\Model\Config $config;
+
+    /**
+     * @param \Magento\Catalog\Helper\Data $productHelper
+     * @param \OlenaK\RegularCustomer\Model\Config $config
+     */
+    public function __construct(
+        \Magento\Catalog\Helper\Data $productHelper,
+        \OlenaK\RegularCustomer\Model\Config $config
+    ) {
         $this->productHelper = $productHelper;
+        $this->config = $config;
     }
 
     /**
@@ -29,8 +38,11 @@ class CurrentProductUpdater implements \Magento\Framework\View\Layout\Argument\U
     {
         if ($this->productHelper->getProduct()) {
             $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
-            ['productId'] = (int)$this->productHelper->getProduct()->getId();
+            ['productId'] = (int) $this->productHelper->getProduct()->getId();
         }
+
+        $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
+        ['allowForGuests'] = (bool) $this->config->allowForGuests();
 
         return $value;
     }

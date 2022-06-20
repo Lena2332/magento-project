@@ -20,7 +20,7 @@
                 <field id="allow_for_guests" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
                     <label>Allow for Guests</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <!-- @TODO: automatically clear caches in case this config is changed -->
+                    <comment>Allow guests to submit discount requests. Clear Page Cache and Block HTML output cache after changing this option</comment>
                 </field>
             </group>
         </section>

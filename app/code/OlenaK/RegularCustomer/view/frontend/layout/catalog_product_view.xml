@@ -48,6 +48,7 @@
                                                       path="regular-customer/index/request"
                                                 />
                                                 <item name="productId" xsi:type="number">0</item>
+                                                <item name="allowForGuests" xsi:type="boolean">false</item>
                                                 <item name="isModal" xsi:type="boolean">1</item>
                                             </item>
                                         </item>

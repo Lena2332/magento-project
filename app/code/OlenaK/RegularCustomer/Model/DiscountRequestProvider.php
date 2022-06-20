@@ -20,12 +20,24 @@ class DiscountRequestProvider
      */
     private \Magento\Store\Model\StoreManagerInterface $storeManager;
 
+    /**
+     * @var \Magento\Customer\Model\Config\Share $shareConfig
+     */
+    private \Magento\Customer\Model\Config\Share $shareConfig;
+
+    /**
+     * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Customer\Model\Config\Share $shareConfig
+     */
     public function __construct (
         DiscountRequestCollectionFactory $discountRequestCollectionFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Config\Share $shareConfig
     ) {
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
         $this->storeManager = $storeManager;
+        $this->shareConfig = $shareConfig;
     }
 
     /**
@@ -40,8 +52,12 @@ class DiscountRequestProvider
         /** @var DiscountRequestCollection $collection */
         $collection = $this->discountRequestCollectionFactory->create();
         $collection->addFieldToFilter('customer_id', $customerId);
-        // @TODO: check if accounts are shared per website or not
-        $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
+
+        //We show requests only for users registered this website and created request in this website
+        //If we want show all requests from all websites we need to use ->isGlobalScope()
+        if ($this->shareConfig->isWebsiteScope()) {
+            $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
+        }
 
         return $collection;
     }

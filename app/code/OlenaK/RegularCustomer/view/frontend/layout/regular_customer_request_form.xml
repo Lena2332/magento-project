@@ -46,6 +46,7 @@
                                             />
                                             <item name="productId" xsi:type="number">0</item>
                                             <item name="isModal" xsi:type="boolean">1</item>
+                                            <item name="allowForGuests" xsi:type="boolean">false</item>
                                         </item>
                                     </item>
                                     <item name="olenak.regularcustomer.form.open.button" xsi:type="array">
