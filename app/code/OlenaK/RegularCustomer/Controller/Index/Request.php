@@ -9,6 +9,7 @@ use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
+use OlenaK\RegularCustomer\Controller\InvalidFormRequestException;
 
 class Request implements
     \Magento\Framework\App\Action\HttpPostActionInterface,
@@ -60,15 +61,21 @@ class Request implements
     private \Psr\Log\LoggerInterface $logger;
 
     /**
+     * @var \OlenaK\RegularCustomer\Model\Config $config
+     */
+    private \OlenaK\RegularCustomer\Model\Config $config;
+
+    /**
      * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      * @param \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
      * @param \OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param \OlenaK\RegularCustomer\Model\Config $config
      */
     public function __construct(
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
@@ -79,7 +86,8 @@ class Request implements
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Magento\Customer\Model\Session $customerSession,
         \Psr\Log\LoggerInterface $logger,
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \OlenaK\RegularCustomer\Model\Config $config
     ) {
         $this->jsonFactory = $jsonFactory;
         $this->discountRequestFactory = $discountRequestFactory;
@@ -90,6 +98,7 @@ class Request implements
         $this->logger = $logger;
         $this->customerSession = $customerSession;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->config = $config;
     }
 
     /**
@@ -101,8 +110,17 @@ class Request implements
     {
         /** @var DiscountRequest $discountRequest */
         $discountRequest = $this->discountRequestFactory->create();
+        $response = $this->jsonFactory->create();
 
         try {
+            if (!$this->config->enabled()) {
+                throw new InvalidFormRequestException();
+            }
+
+            if (!$this->customerSession->isLoggedIn() && !$this->config->allowForGuests()) {
+                throw new InvalidFormRequestException();
+            }
+
             $customerId = $this->customerSession->getCustomerId()
                 ? (int) $this->customerSession->getCustomerId()
                 : null;
@@ -143,22 +161,19 @@ class Request implements
                 $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
             }
 
-            $isAdded = true;
-            $message = __(
-                'You request for product %1 accepted for review!',
-                $this->request->getParam('product_name')
-            );
+            return $response->setData([
+                'message' => __(
+                    'You request for product %1 accepted for review!',
+                    $this->request->getParam('productName')
+                )
+            ]);
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-            $isAdded = false;
-            $message = __('Your request can\'t be sent. Please, contact us if you see this message.');
+            if (!($e instanceof InvalidFormRequestException)) {
+                $this->logger->error($e->getMessage());
+            }
         }
 
-        return $this->jsonFactory->create()
-                ->setData([
-                     'message' => $message,
-                     'added' => $isAdded
-                ]);
+        return $response->setHttpResponseCode(400);
     }
 
     /**

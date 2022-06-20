@@ -6,13 +6,19 @@
     <body>
         <referenceContainer name="product.info.main">
             <container name="olenak.regularcustomer.container.form" htmlClass="customer_request_block" htmlTag="div">
-                <block name="olenak.regularcustomer.title" class="Magento\Framework\View\Element\Template"
-                       template="OlenaK_RegularCustomer::catalog/product/view/title_form.phtml">
+                <block name="olenak.regularcustomer.title"
+                       class="Magento\Framework\View\Element\Template"
+                       template="OlenaK_RegularCustomer::catalog/product/view/title_form.phtml"
+                       ifconfig="olenak_regular_customer/general/enabled"
+                >
                     <arguments>
                         <argument name="title_txt" xsi:type="string">Loyalty program for Regular Customers</argument>
                     </arguments>
                 </block>
-                <block name="olenak.regularcustomer.cmsblock" class="Magento\Cms\Block\BlockByIdentifier">
+                <block name="olenak.regularcustomer.cmsblock"
+                       class="Magento\Cms\Block\BlockByIdentifier"
+                       ifconfig="olenak_regular_customer/general/enabled"
+                >
                     <arguments>
                         <argument name="identifier" xsi:type="string">cms_block_regular_customer</argument>
                     </arguments>
@@ -20,6 +26,7 @@
                 <block class="OlenaK\RegularCustomer\Block\Product\View\ProductDiscountBlock"
                        name="olenak.regularcustomer.form.block"
                        template="OlenaK_RegularCustomer::catalog/product/view/form_block.phtml"
+                       ifconfig="olenak_regular_customer/general/enabled"
                        after="-"
                 >
                     <arguments>

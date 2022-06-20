@@ -26,6 +26,16 @@ class RequestList implements \Magento\Framework\App\Action\HttpGetActionInterfac
     private \Magento\Customer\Model\Url $url;
 
     /**
+     * @var \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory
+     */
+    private \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory;
+
+    /**
+     * @var \OlenaK\RegularCustomer\Model\Config $config
+     */
+    private \OlenaK\RegularCustomer\Model\Config $config;
+
+    /**
      * @param \Magento\Framework\View\Result\PageFactory $pageFactory
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
@@ -35,12 +45,16 @@ class RequestList implements \Magento\Framework\App\Action\HttpGetActionInterfac
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory,
-        \Magento\Customer\Model\Url $url
+        \Magento\Customer\Model\Url $url,
+        \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory,
+        \OlenaK\RegularCustomer\Model\Config $config
     ) {
         $this->pageFactory = $pageFactory;
         $this->customerSession = $customerSession;
         $this->redirectFactory = $redirectFactory;
         $this->url = $url;
+        $this->forwardFactory = $forwardFactory;
+        $this->config = $config;
     }
 
     /**
@@ -50,6 +64,12 @@ class RequestList implements \Magento\Framework\App\Action\HttpGetActionInterfac
      */
     public function execute(): ResultInterface
     {
+        if (!$this->config->enabled()) {
+            return $this->forwardFactory->create()
+                ->setController('index')
+                ->forward('defaultNoRoute');
+        }
+
         if (!$this->customerSession->isLoggedIn()) {
             return $this->redirectFactory->create()->setUrl(
                 $this->url->getLoginUrl()

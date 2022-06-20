@@ -12,6 +12,7 @@
                    name="olenak.regular-customer.request.list"
                    template="OlenaK_RegularCustomer::customer/account/request_list.phtml"
                    cacheable="false"
+                   ifconfig="olenak_regular_customer/general/enabled"
             >
                 <arguments>
                     <argument name="view_model" xsi:type="object">OlenaK\RegularCustomer\ViewModel\Customer\RequestList</argument>
