@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OlenaK\RegularCustomer\ViewModel\Customer;
 
+use OlenaK\RegularCustomer\Model\DiscountRequest;
 use OlenaK\RegularCustomer\Model\DiscountRequestProvider;
 use OlenaK\RegularCustomer\Model\ResourceModel\Collection\Collection as DiscountRequestCollection;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
@@ -43,24 +44,32 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
     private DiscountRequestProvider $discountRequestProvider;
 
     /**
+     * @var \OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
+     */
+    private \OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions;
+
+    /**
      * @param DiscountRequestProvider $discountRequestProvider
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param Product\Visibility $productVisibility
      * @param \Magento\Customer\Model\Session $customerSession
+     * @param \OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
      */
     public function __construct(
         DiscountRequestProvider $discountRequestProvider,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\Product\Visibility $productVisibility,
-        \Magento\Customer\Model\Session $customerSession
+        \Magento\Customer\Model\Session $customerSession,
+        \OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status $statusOptions
     ) {
         $this->discountRequestProvider = $discountRequestProvider;
         $this->storeManager = $storeManager;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->productVisibility = $productVisibility;
         $this->customerSession = $customerSession;
+        $this->statusOptions = $statusOptions;
     }
 
     /**
@@ -105,5 +114,16 @@ class RequestList implements \Magento\Framework\View\Element\Block\ArgumentInter
         $this->loadedProductCollection = $productCollection;
 
         return $this->loadedProductCollection->getItemById($productId);
+    }
+
+    /**
+     * Get discount request label
+     *
+     * @param DiscountRequest $discountRequest
+     * @return string
+     */
+    public function getStatusLabel(DiscountRequest $discountRequest): string
+    {
+        return (string) $this->statusOptions->asArray()[$discountRequest->getStatus()];
     }
 }

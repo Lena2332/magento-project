@@ -27,6 +27,7 @@ $viewModel = $block->getData('view_model');
                 <span><?= $escaper->escapeHtml(__('Requested product:') . ' n/a'/*$discountRequest->getProductName()*/) ?></span>
             <?php endif; ?>
             <br/>
+            <span><?= $escaper->escapeHtml(__('Status: %1', $viewModel->getStatusLabel($discountRequest))) ?></span>
         </li>
     <?php endforeach; ?>
 </ul>
