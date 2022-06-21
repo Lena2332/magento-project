@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+>
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">discount_listing.discount_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>discount_columns</spinner>
+        <deps>
+            <dep>discount_listing.discount_listing_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="add">
+                <url path="*/*/newRequest"/>
+                <class>primary</class>
+                <label translate="true">Add New Request</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="discount_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">request_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>OlenaK_RegularCustomer::listing</aclResource>
+        <dataProvider class="OlenaK\RegularCustomer\Ui\Component\DiscountListingDataProvider" name="discount_listing_data_source">
+            <settings>
+                <requestFieldName>request_id</requestFieldName>
+                <primaryFieldName>request_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <exportButton name="export_button"/>
+        <paging name="listing_paging"/>
+        <massaction class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Listing\MassAction"
+                    component="Magento_Ui/js/grid/tree-massactions"
+                    name="listing_massaction"
+        >
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected requests?</message>
+                        <title translate="true">Delete Requests</title>
+                    </confirm>
+                    <url path="olenak_regular_customer/discount/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="status">
+                <settings>
+                    <type>edit</type>
+                    <label translate="true">Change status</label>
+                    <actions>
+                        <action name="0">
+                            <type>pending</type>
+                            <label translate="true">Pending</label>
+                            <url path="olenak_regular_customer/discount/massChangeStatus">
+                                <param name="status">1</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>approve</type>
+                            <label translate="true">Approved</label>
+                            <url path="olenak_regular_customer/discount/massChangeStatus">
+                                <param name="status">2</param>
+                            </url>
+                        </action>
+                        <action name="2">
+                            <type>decline</type>
+                            <label translate="true">Declined</label>
+                            <url path="olenak_regular_customer/discount/massChangeStatus">
+                                <param name="status">3</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="discount_columns"
+             class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Listing\Columns"
+             template="OlenaK_RegularCustomer/ui/grid/listing"
+    >
+        <settings>
+            <editorConfig>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">request_id</param>
+                <param name="selectProvider" xsi:type="string">discount_listing.discount_listing.discount_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">discount_listing.discount_listing.discount_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>request_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="request_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Discount Request ID</label>
+            </settings>
+        </column>
+        <column name="product_id" component="Magento_Ui/js/grid/columns/link" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="link" xsi:type="string">product_link</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Product ID</label>
+            </settings>
+        </column>
+        <column name="product_name" component="Magento_Ui/js/grid/columns/link" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="link" xsi:type="string">product_link</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Product Name</label>
+                <sortable>false</sortable>
+                <filter>false</filter>
+            </settings>
+        </column>
+        <!-- Note that guest customers do not have ID! In this case column must be empty -->
+        <column name="customer_id" component="Magento_Ui/js/grid/columns/link" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="link" xsi:type="string">customer_link</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Customer ID</label>
+            </settings>
+        </column>
+        <column name="name" component="Magento_Ui/js/grid/columns/link" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="link" xsi:type="string">customer_link</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Customer Name</label>
+            </settings>
+        </column>
+        <column name="email" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">Customer Email</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="70">
+            <settings>
+                <label translate="true">Status</label>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <options class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status"/>
+            </settings>
+        </column>
+        <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store" sortOrder="80">
+            <settings>
+                <label translate="true">Store View</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <sortable>false</sortable>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+            </settings>
+        </column>
+        <actionsColumn name="actions"
+                       class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Listing\Column\BlockActions"
+        >
+            <settings>
+                <indexField>request_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

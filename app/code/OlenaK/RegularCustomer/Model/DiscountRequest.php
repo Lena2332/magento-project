@@ -23,6 +23,10 @@ namespace OlenaK\RegularCustomer\Model;
  */
 class DiscountRequest extends \Magento\Framework\Model\AbstractModel
 {
+    public const STATUS_PENDING = 1;
+    public const STATUS_APPROVED = 2;
+    public const STATUS_DECLINED = 3;
+
     /**
      * @inheritDoc
      */
