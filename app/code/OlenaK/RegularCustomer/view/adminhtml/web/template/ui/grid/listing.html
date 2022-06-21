@@ -6,9 +6,10 @@
         <tbody>
         <tr class="data-row" repeat="foreach: rows, item: '$row'" css="
             '_odd-row': $index % 2,
-            'status-pending': $row().status == 1,
+            'status-pending': $row().status == 1 && $row().old == 0,
             'status-approved': $row().status == 2,
-            'status-declined': $row().status == 3
+            'status-declined': $row().status == 3,
+            'status-old': $row().status == 1 && $row().old == 1,
         ">
             <td outerfasteach="data: getVisible(), as: '$col'"
                 css="getFieldClass($row())" click="getFieldHandler($row())" template="getBody()"/>

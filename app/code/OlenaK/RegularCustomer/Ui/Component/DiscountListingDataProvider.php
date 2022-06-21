@@ -91,6 +91,14 @@ class DiscountListingDataProvider extends \Magento\Framework\View\Element\UiComp
                     ['id' => $item['customer_id']]
                 );
             }
+
+            //Used for highlighting old requests in ui_component
+            $item['old'] = 0;
+            $limit = strtotime('-3 day', strtotime(date("Y-m-d h:i:s")));
+            $requestCreated = strtotime($item['created_at']);
+            if ($requestCreated < $limit) {
+                $item['old'] = 1;
+            }
         }
 
         return $data;
