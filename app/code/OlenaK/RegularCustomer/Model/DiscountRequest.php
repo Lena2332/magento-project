@@ -20,6 +20,8 @@ namespace OlenaK\RegularCustomer\Model;
  * @method $this setStoreId(int $websiteId)
  * @method int|string|null getCreatedAt()
  * @method int|string|null getUpdatedAt()
+ * @method int|string getStatus()
+ * @method $this setStatus(int $status)
  */
 class DiscountRequest extends \Magento\Framework\Model\AbstractModel
 {
