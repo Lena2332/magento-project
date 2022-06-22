@@ -41,7 +41,7 @@ class CurrentProductUpdater implements \Magento\Framework\View\Layout\Argument\U
             ['productId'] = (int) $this->productHelper->getProduct()->getId();
         }
 
-        $value['components']['regularCustomerRequest']['children']['regularCustomerRequestForm']['config']
+        $value['components']['regularCustomerRequest']['children']['olenak.regularcustomer.form.login.button']['config']
         ['allowForGuests'] = (bool) $this->config->allowForGuests();
 
         return $value;

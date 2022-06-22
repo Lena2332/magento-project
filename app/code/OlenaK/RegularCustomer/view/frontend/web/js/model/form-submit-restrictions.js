@@ -3,8 +3,14 @@ define([
 ], function (ko) {
     'use strict';
 
-    return {
-        formSubmitDeniedMessage: ko.observable(),
-        customerMustLogIn: ko.observable()
+    let formSubmitDeniedRestrictions = {
+        customerMustLogIn: ko.observable(false),
+        requestAlreadySent: ko.observable(false)
     };
+
+    formSubmitDeniedRestrictions.submitDenied = ko.computed(function () {
+        return formSubmitDeniedRestrictions.customerMustLogIn() || formSubmitDeniedRestrictions.requestAlreadySent();
+    });
+
+    return formSubmitDeniedRestrictions;
 });

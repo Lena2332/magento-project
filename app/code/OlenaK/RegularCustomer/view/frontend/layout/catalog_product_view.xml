@@ -48,7 +48,6 @@
                                                       path="regular-customer/index/request"
                                                 />
                                                 <item name="productId" xsi:type="number">0</item>
-                                                <item name="allowForGuests" xsi:type="boolean">false</item>
                                                 <item name="isModal" xsi:type="boolean">1</item>
                                             </item>
                                         </item>
@@ -64,6 +63,9 @@
                                         <item name="olenak.regularcustomer.form.login.button" xsi:type="array">
                                             <item name="component" xsi:type="string">OlenaK_RegularCustomer_loginButton</item>
                                             <item name="displayArea" xsi:type="string">olenaK_regularCustomer_loginButton</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="allowForGuests" xsi:type="boolean">false</item>
+                                            </item>
                                         </item>
                                     </item>
                                 </item>
