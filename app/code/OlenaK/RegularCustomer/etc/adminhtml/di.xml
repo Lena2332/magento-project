@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="OlenaK\RegularCustomer\Controller\Adminhtml\Discount\Save">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="OlenaK\RegularCustomer\Controller\Adminhtml\Discount\InlineEdit">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="OlenaK\RegularCustomer\Controller\Adminhtml\Discount\AbstractMassAction">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

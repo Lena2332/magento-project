@@ -32,21 +32,29 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     private \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
     /**
+     * @var \Magento\Backend\Model\Auth\Session $authSession
+     */
+    private \Magento\Backend\Model\Auth\Session $authSession;
+
+    /**
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Backend\Model\Auth\Session $authSession
      */
     public function __construct(
         DiscountRequestCollectionFactory $discountRequestCollectionFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Magento\Backend\App\Action\Context $context
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Backend\Model\Auth\Session $authSession
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
         $this->transactionFactory = $transactionFactory;
+        $this->authSession = $authSession;
     }
 
     /**
@@ -79,6 +87,10 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
                 array_keys($items)
             );
 
+            // Get UserId
+            $userData = $this->authSession->getUser();
+            $userId = ($userData) ? (int) $userData->getData('user_id') : null;
+
             /** @var Transaction $transaction */
             $transaction = $this->transactionFactory->create();
 
@@ -98,6 +110,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
                 }
 
                 $discountRequest->setStatus($newStatus);
+                $discountRequest->setUserId($userId);
                 $transaction->addObject($discountRequest);
             }
 

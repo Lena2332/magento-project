@@ -205,6 +205,13 @@
                 <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
             </settings>
         </column>
+        <column name="user_id" sortOrder="85">
+            <settings>
+                <label translate="true">User ID</label>
+                <sortable>false</sortable>
+                <filter>textRange</filter>
+            </settings>
+        </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="90">
             <settings>
                 <filter>dateRange</filter>

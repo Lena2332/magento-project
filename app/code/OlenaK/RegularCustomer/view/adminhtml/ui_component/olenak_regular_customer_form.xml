@@ -49,6 +49,13 @@
                 <visible>false</visible>
             </settings>
         </field>
+        <field name="user_id" formElement="input" sortOrder="10">
+            <settings>
+                <dataScope>user_id</dataScope>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
         <field name="product_id" formElement="input" sortOrder="20">
             <settings>
                 <dataScope>product_id</dataScope>

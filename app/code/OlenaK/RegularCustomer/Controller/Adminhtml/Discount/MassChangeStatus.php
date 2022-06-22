@@ -30,9 +30,14 @@ class MassChangeStatus extends AbstractMassAction
         $collection->addFieldToFilter('status', ['neq' => $status]);
         $collectionSize = $collection->count();
 
+        // Get UserId
+        $userData = $this->authSession->getUser();
+        $userId = ($userData) ? (int) $userData->getData('user_id') : null;
+
         /** @var DiscountRequest $item */
         foreach ($collection as $item) {
             $item->setStatus($status);
+            $item->setUserId($userId);
             $transaction->addObject($item);
         }
 

@@ -26,20 +26,28 @@ abstract class AbstractMassAction extends \Magento\Backend\App\Action implements
     protected \Magento\Framework\DB\TransactionFactory $transactionFactory;
 
     /**
+     * @var \Magento\Backend\Model\Auth\Session $authSession
+     */
+    protected \Magento\Backend\Model\Auth\Session $authSession;
+
+    /**
      * @param \Magento\Ui\Component\MassAction\Filter $filter
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Backend\Model\Auth\Session $authSession
      */
     public function __construct(
         \Magento\Ui\Component\MassAction\Filter $filter,
         DiscountRequestCollectionFactory $discountRequestCollectionFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
-        \Magento\Backend\App\Action\Context $context
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Backend\Model\Auth\Session $authSession
     ) {
         $this->filter = $filter;
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
         $this->transactionFactory = $transactionFactory;
+        $this->authSession = $authSession;
         parent::__construct($context);
     }
 }

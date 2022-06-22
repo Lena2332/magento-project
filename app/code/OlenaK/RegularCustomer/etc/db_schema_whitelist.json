@@ -4,6 +4,7 @@
             "request_id": true,
             "product_id": true,
             "customer_id": true,
+            "user_id": true,
             "admin_user_id": true,
             "name": true,
             "email": true,
