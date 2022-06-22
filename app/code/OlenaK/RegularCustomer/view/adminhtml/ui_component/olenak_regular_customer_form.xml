@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+>
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">olenak_regular_customer_form.discount_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="spinner" xsi:type="string">discount_form</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Form\Button\Save"/>
+            <button name="delete" class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Form\Button\Delete"/>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+        </buttons>
+        <namespace>discount_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>olenak_regular_customer_form.discount_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="discount_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="olenak_regular_customer/discount/save"/>
+        </settings>
+        <dataProvider class="OlenaK\RegularCustomer\Ui\Component\DiscountFormDataProvider"
+                      name="discount_form_data_source"
+        >
+            <settings>
+                <requestFieldName>request_id</requestFieldName>
+                <primaryFieldName>request_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="discount_form">
+        <settings>
+            <label/>
+        </settings>
+        <field name="request_id" formElement="input" sortOrder="10">
+            <settings>
+                <dataScope>request_id</dataScope>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="product_id" formElement="input" sortOrder="20">
+            <settings>
+                <dataScope>product_id</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Product ID</label>
+                <validation>
+                    <!-- Product ID may be empty in case the product was deleted -->
+                    <!-- <rule name="required-entry" xsi:type="boolean">true</rule> -->
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="customer_id" formElement="input" sortOrder="30">
+            <settings>
+                <dataScope>customer_id</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Customer ID</label>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="name" formElement="input" sortOrder="40">
+            <settings>
+                <dataScope>name</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Customer Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="email" formElement="input" sortOrder="50">
+            <settings>
+                <dataScope>email</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Customer Email</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="status" formElement="select" sortOrder="70">
+            <settings>
+                <dataScope>status</dataScope>
+                <dataType>number</dataType>
+                <label translate="true">Status</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="OlenaK\RegularCustomer\Ui\Component\DiscountRequest\Source\Status"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="store_id" formElement="select" sortOrder="80">
+            <settings>
+                <dataScope>store_id</dataScope>
+                <dataType>number</dataType>
+                <label translate="true">Store View</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="notify" formElement="checkbox" sortOrder="90">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <dataScope>notify</dataScope>
+                <label translate="true">Notify Customer by Email</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
