@@ -103,11 +103,11 @@
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
                 <param name="indexField" xsi:type="string">request_id</param>
-                <param name="selectProvider" xsi:type="string">olenak_regular_customer_listing.discount_listing.discount_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">olenak_regular_customer_listing.olenak_regular_customer_listing.discount_columns.ids</param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">olenak_regular_customer_listing.discount_listing.discount_columns_editor</item>
+                    <item name="provider" xsi:type="string">olenak_regular_customer_listing.olenak_regular_customer_listing.discount_columns_editor</item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
