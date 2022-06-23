@@ -124,7 +124,7 @@ class Email
                         'store' => $storeId ?: $this->storeManager->getStore()->getId()
                     ]
                 )
-                ->setFromByScope('support')
+                ->setFromByScope($this->config->getSenderEmailIdentity(), $storeId ?: null)
                 ->setTemplateVars($templateVariables)
                 ->addTo($recipientEmail)
                 ->getTransport();
