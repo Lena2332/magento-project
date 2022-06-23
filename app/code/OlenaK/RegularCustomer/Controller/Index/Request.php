@@ -145,7 +145,8 @@ class Request implements
             /** @var ProductCollection $productCollection */
             $productCollection = $this->productCollectionFactory->create();
             $productCollection->addIdFilter($productId)
-                ->setPageSize(1);
+                ->setPageSize(1)
+                ->addAttributeToSelect('name');
             $product = $productCollection->getFirstItem();
             $productId = (int) $product->getId();
 
@@ -169,12 +170,12 @@ class Request implements
                 $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
             }
 
-            $this->email->sendNewDiscountRequestEmail($name, $email, (string) $product->getDataByKey('name'));
+            $this->email->sendNewDiscountRequestEmail($name, $email, (string) $product->getName());
 
             return $response->setData([
                 'message' => __(
                     'You request for product %1 accepted for review!',
-                    $this->request->getParam('productName')
+                    (string) $product->getName()
                 )
             ]);
         } catch (\Exception $e) {
