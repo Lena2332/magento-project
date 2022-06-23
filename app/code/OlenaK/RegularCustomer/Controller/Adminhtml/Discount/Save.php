@@ -8,6 +8,7 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Customer\Model\ResourceModel\Customer\Collection as CustomerCollection;
 use OlenaK\RegularCustomer\Model\Authorization;
 use Magento\Framework\Controller\ResultInterface;
+use OlenaK\RegularCustomer\Model\DiscountRequest;
 
 class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface
 {
@@ -39,6 +40,16 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
     private \Magento\Backend\Model\Auth\Session $authSession;
 
     /**
+     * @var  \OlenaK\RegularCustomer\Model\Email $email
+     */
+    private  \OlenaK\RegularCustomer\Model\Email $email;
+
+    /**
+     * @var  \OlenaK\RegularCustomer\Model\Email $email
+     */
+    private  \Magento\Store\Model\StoreManager $storeManager;
+
+    /**
      * Save constructor.
      * @param \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
      * @param \OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource
@@ -46,6 +57,8 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerCollectionFactory
      * @param \Magento\Backend\Model\Auth\Session $authSession
+     * @param \OlenaK\RegularCustomer\Model\Email $email
+     * @param \Magento\Store\Model\StoreManager $storeManager
      */
     public function __construct(
         \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory,
@@ -53,7 +66,10 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         \Magento\Backend\App\Action\Context $context,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerCollectionFactory,
-        \Magento\Backend\Model\Auth\Session $authSession
+        \Magento\Backend\Model\Auth\Session $authSession,
+        \OlenaK\RegularCustomer\Model\Email $email,
+        \Magento\Store\Model\StoreManager $storeManager
+
     ) {
         parent::__construct($context);
         $this->discountRequestFactory = $discountRequestFactory;
@@ -61,6 +77,8 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         $this->productCollectionFactory = $productCollectionFactory;
         $this->customerCollectionFactory = $customerCollectionFactory;
         $this->authSession = $authSession;
+        $this->email = $email;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -89,9 +107,12 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
 
         /** @var ProductCollection $productCollection */
         $productCollection = $this->productCollectionFactory->create();
-        $productCollection->addIdFilter($productFormId)->setPageSize(1);
+        $productCollection->addIdFilter($productFormId)
+            ->setPageSize(1)
+            ->addAttributeToSelect('name');
         $product = $productCollection->getFirstItem();
         $productId = (int) $product->getId();
+        $productName = (string) $product->getName();
 
         if (!$productId) {
             $this->messageManager->addErrorMessage(__('Product with id %1 does not exist.', $productFormId));
@@ -110,10 +131,12 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         if ($customerFormId > 0) {
             /** @var CustomerCollection $customerCollection */
             $customerCollection = $this->customerCollectionFactory->create();
-            $customerCollection->addFilter('entity_id', $customerFormId)->setPageSize(1);
+            $customerCollection->addFilter('entity_id', $customerFormId)
+                ->setPageSize(1)
+                ->addAttributeToSelect('email');
             $customer = $customerCollection->getFirstItem();
             $customerId = (int) $customer->getId();
-
+            $customerEmail = (string) $customer->getEmail();
             if (!$customerId) {
                 $this->messageManager->addErrorMessage(__('Customer with id %1 does not exist.', $customerFormId));
 
@@ -146,6 +169,25 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         }
 
         if ($discountRequest->getId()) {
+            //Send email to customer
+            $storeId = (int) $this->storeManager->getWebsite($discountRequest->getStoreId())->getDefaultStore()->getId();
+            $customerEmail = isset($customerEmail)
+                ? $customerEmail
+                : $discountRequest->getEmail();
+
+            if ($request->getParam('notify')) {
+                switch ($discountRequest->getStatus()) {
+                    case DiscountRequest::STATUS_APPROVED:
+                        $this->email->sendRequestApprovedEmail($customerEmail, $productName, $storeId);
+                        break;
+                    case DiscountRequest::STATUS_DECLINED:
+                        $this->email->sendRequestDeclinedEmail($customerEmail, $productName, $storeId);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             return $resultRedirect->setPath(
                 '*/*/edit',
                 [
