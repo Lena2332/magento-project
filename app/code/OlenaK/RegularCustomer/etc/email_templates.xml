@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation=
+            "urn:magento:module:Magento_Email:etc/email_templates.xsd"
+>
+    <template id="olenak_new_discount_request"
+              label="New Personal Discount Request"
+              file="olenak_new_discount_request.html"
+              type="html"
+              module="OlenaK_RegularCustomer"
+              area="frontend"
+    />
+    <template id="olenak_discount_request_approved"
+              label="Personal Discount Approved"
+              file="olenak_discount_request_approved.html"
+              type="html"
+              module="OlenaK_RegularCustomer"
+              area="frontend"
+    />
+    <template id="olenak_discount_request_declined"
+              label="Personal Discount Declined"
+              file="olenak__discount_request_declined.html"
+              type="html"
+              module="OlenaK_RegularCustomer"
+              area="frontend"
+    />
+</config>

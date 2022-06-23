@@ -17,7 +17,7 @@ define([
             },
 
             success: function (response) {
-                let title = response.added ? $.mage.__('Your request posted') : $.mage.__('Your request not posted');
+                let title = $.mage.__('Your request posted');
 
                 alert({
                     title: title,

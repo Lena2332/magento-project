@@ -1,0 +1,19 @@
+<!--@subject {{trans "New Personal Discount Request"}} @-->
+<!--@vars {
+"var customer_name":"Customer Email",
+"var product_name":"Product Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hi, %customer_name!" customer_name=$customer_name}}</p>
+            <p>{{trans "Thank you for being interested in the product %product_name." product_name=$product_name}}</p>
+            <p>{{trans "We'll notify you updated about the request status."}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

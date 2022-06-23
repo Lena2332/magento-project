@@ -66,6 +66,11 @@ class Request implements
     private \OlenaK\RegularCustomer\Model\Config $config;
 
     /**
+     * @var \OlenaK\RegularCustomer\Model\Email $email
+     */
+    private \OlenaK\RegularCustomer\Model\Email $email;
+
+    /**
      * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      * @param \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
      * @param \OlenaK\RegularCustomer\Model\ResourceModel\DiscountRequest $discountRequestResource
@@ -76,6 +81,7 @@ class Request implements
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \OlenaK\RegularCustomer\Model\Config $config
+     * @param \OlenaK\RegularCustomer\Model\Email $email
      */
     public function __construct(
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
@@ -87,7 +93,8 @@ class Request implements
         \Magento\Customer\Model\Session $customerSession,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \OlenaK\RegularCustomer\Model\Config $config
+        \OlenaK\RegularCustomer\Model\Config $config,
+        \OlenaK\RegularCustomer\Model\Email $email
     ) {
         $this->jsonFactory = $jsonFactory;
         $this->discountRequestFactory = $discountRequestFactory;
@@ -99,6 +106,7 @@ class Request implements
         $this->customerSession = $customerSession;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->config = $config;
+        $this->email = $email;
     }
 
     /**
@@ -160,6 +168,8 @@ class Request implements
                 $productIds[] = $productId;
                 $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
             }
+
+            $this->email->sendNewDiscountRequestEmail($name, $email, (string) $product->getDataByKey('name'));
 
             return $response->setData([
                 'message' => __(

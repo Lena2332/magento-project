@@ -14,6 +14,9 @@ class Config
     public const XML_PATH_OLENAK_REGULAR_CUSTOMER_GENERAL_ALLOW_FOR_GUESTS
         = 'olenak_regular_customer/general/allow_for_guests';
 
+    public const XML_PATH_OLENAK_REGULAR_CUSTOMER_GENERAL_SALES_EMAIL_IDENTITY
+        = 'olenak_regular_customer/general/sender_email_identity';
+
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
@@ -51,6 +54,17 @@ class Config
         return (bool)$this->scopeConfig->getValue(
             self::XML_PATH_OLENAK_REGULAR_CUSTOMER_GENERAL_ALLOW_FOR_GUESTS,
             ScopeInterface::SCOPE_WEBSITE
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getSenderEmailIdentity(): string
+    {
+        return (string) $this->scopeConfig->getValue(
+            self::XML_PATH_OLENAK_REGULAR_CUSTOMER_GENERAL_SALES_EMAIL_IDENTITY,
+            ScopeInterface::SCOPE_STORE
         );
     }
 }

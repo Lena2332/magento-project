@@ -1,0 +1,16 @@
+<!--@subject {{trans "Personal Discount Request Approved"}} @-->
+<!--@vars {
+"var product_name":"Product Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p>{{trans "Your request for the product %product_name has been <span class="olenak-discount-request-approved">approved</span>!" product_name=$product_name|raw}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}
