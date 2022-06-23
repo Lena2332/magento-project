@@ -29,6 +29,9 @@
         <column xsi:type="smallint" name="status" padding="2" unsigned="true" nullable="false" default="1"
                 comment="Status"
         />
+        <column xsi:type="smallint" name="email_sent" padding="2" unsigned="true" nullable="false" default="0"
+                comment="Email Sent"
+        />
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"
         />

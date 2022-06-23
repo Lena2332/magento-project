@@ -8,6 +8,7 @@
             "admin_user_id": true,
             "name": true,
             "email": true,
+            "email_sent": true,
             "store_id": true,
             "status": true,
             "created_at": true,
