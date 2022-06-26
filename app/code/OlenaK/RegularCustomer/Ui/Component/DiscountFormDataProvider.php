@@ -39,10 +39,22 @@ class DiscountFormDataProvider extends \Magento\Ui\DataProvider\AbstractDataProv
         $data = [];
 
         foreach (parent::getData()['items'] as $item) {
+            $item['email_sent'] = $this->convertBooltoYesNo((int) $item['email_sent']);
             $data[$item['request_id']] = $item;
         }
 
         return $data;
+    }
+
+
+    /**
+     * @param int $val 0|1
+     * @return string yes|no
+     */
+    private function convertBooltoYesNo (int $val): string
+    {
+        $sourceData = [0 => __('No'), 1 => __('Yes')];
+        return (isset($sourceData[$val])) ? $sourceData[$val]->getText() : '';
     }
 }
 

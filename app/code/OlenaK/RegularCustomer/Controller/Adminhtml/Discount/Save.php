@@ -154,11 +154,15 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         $userData = $this->authSession->getUser();
         $userId = ($userData) ? (int) $userData->getData('user_id') : null;
 
+        // Get previous and current statuses
+        $previousStatus = (int) $discountRequest->getStatus();
+        $currentStatus = (int) $request->getParam('status');
+
         $discountRequest->setProductId(((int) $request->getParam('product_id')) ?: null)
             ->setCustomerId(((int) $request->getParam('customer_id')) ? : null)
             ->setName($request->getParam('name'))
             ->setEmail($request->getParam('email'))
-            ->setStatus((int) $request->getParam('status'))
+            ->setStatus($currentStatus)
             ->setStoreId((int) $request->getParam('store_id'))
             ->setUserId($userId);
 
@@ -175,17 +179,23 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
                 ? $customerEmail
                 : $discountRequest->getEmail();
 
+            $emailSentStatus = false;
             if ($request->getParam('notify')) {
-                switch ($discountRequest->getStatus()) {
+                switch ($currentStatus) {
                     case DiscountRequest::STATUS_APPROVED:
-                        $this->email->sendRequestApprovedEmail($customerEmail, $productName, $storeId);
+                        $emailSentStatus = $this->email->sendRequestApprovedEmail($customerEmail, $productName, $storeId);
                         break;
                     case DiscountRequest::STATUS_DECLINED:
-                        $this->email->sendRequestDeclinedEmail($customerEmail, $productName, $storeId);
+                        $emailSentStatus = $this->email->sendRequestDeclinedEmail($customerEmail, $productName, $storeId);
                         break;
                     default:
                         break;
                 }
+            }
+
+            // Update field email_sent 0 if cheanged status and not allowed notification, 1 - if email was sent
+            if (($currentStatus != $previousStatus && !$request->getParam('notify')) ||  $emailSentStatus) {
+                $this->updateEmailStatus($discountRequest, $emailSentStatus);
             }
 
             return $resultRedirect->setPath(
@@ -197,5 +207,21 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         }
 
         return $resultRedirect->setPath('*/*/index');
+    }
+
+    /**
+     * @param DiscountRequest $discountRequest
+     * @param bool $emailStatus
+     * @return void
+     */
+    private function updateEmailStatus (DiscountRequest $discountRequest, bool $emailStatus): void
+    {
+        $discountRequest->setEmailSent((int) $emailStatus);
+
+        try {
+            $this->discountRequestResource->save($discountRequest);
+        } catch (\Exception $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+        }
     }
 }

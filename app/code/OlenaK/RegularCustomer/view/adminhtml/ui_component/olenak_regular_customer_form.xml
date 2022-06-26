@@ -157,5 +157,14 @@
                 </checkbox>
             </formElements>
         </field>
+        <field name="email_sent"  formElement="input" sortOrder="100">
+            <settings>
+                <dataScope>email_sent</dataScope>
+                <dataType>text</dataType>
+                <elementTmpl>ui/form/element/text</elementTmpl>
+                <label translate="true">Email Sent</label>
+            </settings>
+        </field>
+
     </fieldset>
 </form>
