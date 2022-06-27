@@ -147,7 +147,7 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
 
             // Generate random dada for the last 7 days for statusChangedAt
             $dateNow = strtotime(date("Y-m-d h:i:s"));
-            $datePast = strtotime('-7 day', strtotime(date("Y-m-d h:i:s")));
+            $datePast = strtotime('-7 day', $dateNow);
             $statusUpdatedAt = date('Y-m-d h:i:s', random_int($datePast, $dateNow));
 
             $randomWebsiteId = (!empty($storesIds)) ? (int) $storesIds[array_rand($storesIds)] : 1;
