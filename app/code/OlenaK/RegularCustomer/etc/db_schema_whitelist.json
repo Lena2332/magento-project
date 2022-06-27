@@ -12,7 +12,8 @@
             "store_id": true,
             "status": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "status_changed_at": true
         },
         "index": {
             "OLENAK_REGULAR_CUSTOMER_REQUEST_PRODUCT_ID": true,

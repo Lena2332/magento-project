@@ -34,7 +34,10 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
      */
     private \Magento\Framework\DB\TransactionFactory $transactionFactory;
 
-
+    /**
+     * @var  \Magento\Store\Model\StoreManager $storeManager
+     */
+    private  \Magento\Store\Model\StoreManager $storeManager;
 
     private array $idsByCollection = [];
 
@@ -44,6 +47,7 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
      * @param \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerCollectionFactory
      * @param \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
+     * @param \Magento\Store\Model\StoreManager $storeManager
      * @param string|null $name
      */
     public function __construct(
@@ -51,12 +55,14 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
         \Magento\Customer\Model\ResourceModel\Customer\CollectionFactory $customerCollectionFactory,
         \OlenaK\RegularCustomer\Model\DiscountRequestFactory $discountRequestFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
+        \Magento\Store\Model\StoreManager $storeManager,
         string $name = null
     ) {
         parent::__construct($name);
         $this->productCollectionFactory = $productCollectionFactory;
         $this->customerCollectionFactory = $customerCollectionFactory;
         $this->discountRequestFactory = $discountRequestFactory;
+        $this->storeManager = $storeManager;
         $this->transactionFactory = $transactionFactory;
     }
 
@@ -133,17 +139,26 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
         ];
         $transaction = $this->transactionFactory->create();
 
+        $storesIds = array_keys($this->storeManager->getWebsites());
+
         foreach ($productIdsRandomKeys as $productIdsRandomKey) {
             /** @var DiscountRequest $discountRequest */
             $discountRequest = $this->discountRequestFactory->create();
-            // @TODO: hardcoded because we work with the Sample Data and we are sure that this website exists
-            // This may not be true for the real project
-            $discountRequest->setWebsiteId(1)
+
+            // Generate random dada for the last 7 days for statusChangedAt
+            $dateNow = strtotime(date("Y-m-d h:i:s"));
+            $datePast = strtotime('-7 day', strtotime(date("Y-m-d h:i:s")));
+            $statusUpdatedAt = date('Y-m-d h:i:s', random_int($datePast, $dateNow));
+
+            $randomWebsiteId = (!empty($storesIds)) ? (int) $storesIds[array_rand($storesIds)] : 1;
+
+            $discountRequest->setStoreId($randomWebsiteId)
                 ->setProductId($productIds[$productIdsRandomKey])
                 ->setCustomerId($customerId)
                 ->setEmail($customerId ? null : 'john-doe@example.com')
                 ->setName($customerId ? null : 'John Doe')
-                ->setStatus($statuses[array_rand($statuses)]);
+                ->setStatus($statuses[array_rand($statuses)])
+                ->setStatusChangedAt($statusUpdatedAt);
             $transaction->addObject($discountRequest);
         }
 

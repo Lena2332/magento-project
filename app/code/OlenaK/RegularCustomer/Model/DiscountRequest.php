@@ -26,6 +26,8 @@ namespace OlenaK\RegularCustomer\Model;
  * @method $this setStatus(int $status)
  * @method int|string getEmailSent()
  * @method $this setEmailSent(int $emailSent)
+ * @method int|string|null getStatusChangedAt()
+ * @method $this setStatusChangedAt(string $statusChangedAt)
  */
 class DiscountRequest extends \Magento\Framework\Model\AbstractModel
 {
