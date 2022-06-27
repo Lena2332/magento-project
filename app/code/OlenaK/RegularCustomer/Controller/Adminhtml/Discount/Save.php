@@ -45,7 +45,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
     private  \OlenaK\RegularCustomer\Model\Email $email;
 
     /**
-     * @var  \OlenaK\RegularCustomer\Model\Email $email
+     * @var  \Magento\Store\Model\StoreManager $storeManager
      */
     private  \Magento\Store\Model\StoreManager $storeManager;
 
