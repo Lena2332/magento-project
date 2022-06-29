@@ -89,4 +89,38 @@
                     onDelete="SET NULL"
         />
     </table>
+    <table name="quote" resource="default" engine="innodb">
+        <column
+            xsi:type="decimal"
+            name="regular_customer"
+            nullable="true"
+            comment="Base Regular Customer"
+            scale="4"
+            precision="20"
+        />
+        <column
+            xsi:type="decimal"
+            name="base_regular_customer"
+            nullable="true"
+            comment="Regular Customer"
+            scale="4"
+            precision="20"
+        />
+    </table>
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="decimal"
+                name="regular_customer"
+                scale="4"
+                precision="20"
+                nullable="true"
+                comment="Regular Customer"
+        />
+        <column xsi:type="decimal"
+                name="base_regular_customer"
+                scale="4"
+                precision="20"
+                nullable="true"
+                comment="Base Regular Customer"
+        />
+    </table>
 </schema>

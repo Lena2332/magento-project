@@ -28,5 +28,13 @@
             "OLENAK_REGULAR_CUSTOMER_REQUEST_STORE_ID_M2_STORE_STORE_ID": true,
             "OLENAK_REGULAR_CUSTOMER_REQUEST_STORE_ID_M2_yyyyy_ID": true
         }
+    },
+    "quote": {
+        "regular_customer": true,
+        "base_regular_customer": true
+    },
+    "sales_order": {
+        "regular_customer": true,
+        "base_regular_customer": true
     }
 }
