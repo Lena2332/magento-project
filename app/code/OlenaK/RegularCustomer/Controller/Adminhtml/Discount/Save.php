@@ -175,9 +175,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
         if ($discountRequest->getId()) {
             //Send email to customer
             $storeId = (int) $this->storeManager->getWebsite($discountRequest->getStoreId())->getDefaultStore()->getId();
-            $customerEmail = isset($customerEmail)
-                ? $customerEmail
-                : $discountRequest->getEmail();
+            $customerEmail = $customerEmail ?? $discountRequest->getEmail();
 
             $emailSentStatus = false;
             if ($request->getParam('notify')) {
@@ -194,7 +192,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
             }
 
             // Update field email_sent 0 if cheanged status and not allowed notification, 1 - if email was sent
-            if (($currentStatus != $previousStatus && !$request->getParam('notify')) ||  $emailSentStatus) {
+            if (($currentStatus !== $previousStatus && !$request->getParam('notify')) ||  $emailSentStatus) {
                 $this->updateEmailStatus($discountRequest, $emailSentStatus);
             }
 
@@ -214,7 +212,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
      * @param bool $emailStatus
      * @return void
      */
-    private function updateEmailStatus (DiscountRequest $discountRequest, bool $emailStatus): void
+    private function updateEmailStatus(DiscountRequest $discountRequest, bool $emailStatus): void
     {
         $discountRequest->setEmailSent((int) $emailStatus);
 

@@ -178,7 +178,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     /**
      * @param int $customerId
      */
-    private function getCustomerEmail (string $email, int $customerId = 0): string
+    private function getCustomerEmail(string $email, int $customerId = 0): string
     {
         $customerEmail = $email;
         if ($customerId) {
@@ -191,7 +191,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     /**
      * @param int $productId
      */
-    private function getProductName (int $productId): string
+    private function getProductName(int $productId): string
     {
         if ($productId) {
             $product = $this->productRepository->getById($productId);
