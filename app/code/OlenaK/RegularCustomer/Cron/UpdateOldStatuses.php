@@ -42,21 +42,22 @@ class UpdateOldStatuses
         /** @var DiscountRequest $discountRequest */
         $discountRequestCollection = $this->discountRequestCollectionFactory->create();
 
-        $dateNow = strtotime(date("Y-m-d h:i:s"));
+        $dateNow = strtotime(date('Y-m-d h:i:s'));
         $datePast = strtotime('-3 day', $dateNow);
 
-        $collection = $discountRequestCollection->addFieldToFilter('status',
+        $collection = $discountRequestCollection->addFieldToFilter(
+                'status',
                 ['eq' => DiscountRequest::STATUS_PENDING]
-            )
-            ->addFieldToFilter('created_at',
-                ['lt' => date("Y-m-d h:i:s", $datePast)]
+            )->addFieldToFilter(
+                'created_at',
+                ['lt' => date('Y-m-d h:i:s', $datePast)]
             );
 
         /** @var DiscountRequest $item */
         if ($collection->count()) {
             foreach ($collection as $item) {
                 $item->setStatus(DiscountRequest::STATUS_APPROVED);
-                $item->setStatusChangedAt(date("Y-m-d h:i:s"));
+                $item->setStatusChangedAt(date('Y-m-d h:i:s'));
 
                 $transaction->addObject($item);
             }
