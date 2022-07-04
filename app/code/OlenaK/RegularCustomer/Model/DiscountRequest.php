@@ -7,7 +7,7 @@ namespace OlenaK\RegularCustomer\Model;
 /**
  * @method int|string|null getRegularCustomerId()
  * @method int|string|null getProductId()
- * @method $this setProductId(int $productId)
+ * @method $this setProductId(int|null $productId)
  * @method int|string|null getCustomerId()
  * @method $this setCustomerId(int $customerId)
  * @method int|string|null getAdminUserId()

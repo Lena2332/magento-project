@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="2columns-right"
+>
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="olenak.regularcustomer.form.block">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="regularCustomerRequest" xsi:type="array">
+                                <item name="component" xsi:type="string">uiCollection</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="regularCustomerRequestForm" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="isModal" xsi:type="boolean">0</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>
