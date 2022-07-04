@@ -6,7 +6,6 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="olenak_regular_customer_generate_requests" xsi:type="object">OlenaK\RegularCustomer\Console\Command\GenerateFixtures</item>
-                <item name="olenak_regular_customer_area-emulation-demo" xsi:type="object">OlenaK\RegularCustomer\Console\Command\AreaEmulationDemo</item>
             </argument>
         </arguments>
     </type>
