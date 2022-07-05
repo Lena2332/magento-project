@@ -12,7 +12,6 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\Website;
 use OlenaK\RegularCustomer\Model\DiscountRequest;
 use OlenaK\RegularCustomer\Model\ResourceModel\Collection\CollectionFactory as DiscountRequestCollectionFactory;
-use Psr\Log\LoggerInterface;
 
 class RegularCustomerLogin implements \Magento\Framework\Event\ObserverInterface
 {
