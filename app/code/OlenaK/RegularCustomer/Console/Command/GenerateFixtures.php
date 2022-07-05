@@ -152,11 +152,12 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
 
             $randomWebsiteId = (!empty($storesIds)) ? (int) $storesIds[array_rand($storesIds)] : 1;
 
+            $randomName = $this->getRandomName();
             $discountRequest->setStoreId($randomWebsiteId)
                 ->setProductId($productIds[$productIdsRandomKey])
                 ->setCustomerId($customerId)
-                ->setEmail($customerId ? null : $this->getRandomEmail())
-                ->setName($customerId ? null : $this->getRandomName())
+                ->setEmail($customerId ? null : $this->getRandomEmail($randomName))
+                ->setName($customerId ? null : $randomName)
                 ->setStatus($statuses[array_rand($statuses)])
                 ->setStatusChangedAt($statusUpdatedAt);
             $transaction->addObject($discountRequest);
@@ -182,19 +183,16 @@ class GenerateFixtures extends \Symfony\Component\Console\Command\Command
     }
 
     /**
+     * @var string
      * @return string
      */
-    private function getRandomEmail(): string
+    private function getRandomEmail(string $name): string
     {
         static $randomEmails = [
-            'Norbert@gmail.com','Damon@yahoo.com','Laverna@yahoo.com','Annice@gmail.com','Brandie@yahoo.com','Emogene@ukr.net','Cinthia@yahoo.com','Rhoda@yahoo.com',
-            'Debbra@ukr.net','Reid@ukr.net','Desire@gmail.com','Sueann@gmail.com','Shemeka@gmail.com','Julian@gmail.com','Winona@ukr.net','Billie@ukr.net','Michaela@gmail.com','Loren@gmail.com',
-            'Jacalyn@gmail.com','Lovella@yahoo.com','Bernice@gmail.com','Kassie@gmail.com','Natalya@ukr.net','Whitley@ukr.net','Katelin@ukr.net','Danica@ukr.net',
-            'Veronique@yahoo.com','Cathrine@gmail.com','Jolynn@ukr.net','Meridith@gmail.com','Moira@gmail.com','Vince@gmail.com','Fransisca@ukr.net','Catina@ukr.net',
-            'Laurine@gmail.com','Freida@yahoo.com','Torri@yahoo.com','Terese@yahoo.com','Dorothea@ukr.net','Landon@gmail.com','Emelia@gmail.com'
+            '@gmail.com','@yahoo.com','@ukr.net'
         ];
 
-        return strtolower($randomEmails[array_rand($randomEmails)]);
+        return strtolower($name.$randomEmails[array_rand($randomEmails)]);
     }
 
 }

@@ -36,17 +36,6 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
      */
     private \Magento\Backend\Model\Auth\Session $authSession;
 
-
-    /**
-     * @var \Magento\Customer\Model\ResourceModel\CustomerRepository $customerRepository
-     */
-    protected \Magento\Customer\Model\ResourceModel\CustomerRepository $customerRepository;
-
-    /**
-     * @var \Magento\Catalog\Model\ProductRepository $productRepository
-     */
-    protected \Magento\Catalog\Model\ProductRepository $productRepository;
-
     /**
      * @var \Magento\Store\Model\StoreManager $storeManager
      */
@@ -58,15 +47,26 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     protected \OlenaK\RegularCustomer\Model\Email $email;
 
     /**
+     * @var \OlenaK\RegularCustomer\Model\CustomerProvider $customerProvider
+     */
+    protected \OlenaK\RegularCustomer\Model\CustomerProvider $customerProvider;
+
+    /**
+     * @var \OlenaK\RegularCustomer\Model\ProductProvider $productProvider
+     */
+    protected \OlenaK\RegularCustomer\Model\ProductProvider $productProvider;
+
+    /**
      * @param DiscountRequestCollectionFactory $discountRequestCollectionFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Backend\Model\Auth\Session $authSession
      * @param \Magento\Customer\Model\ResourceModel\CustomerRepository $customerRepository
-     * @param \Magento\Catalog\Model\ProductRepository $productRepository
      * @param \Magento\Store\Model\StoreManager $storeManager
      * @param \OlenaK\RegularCustomer\Model\Email $email
+     * @param \OlenaK\RegularCustomer\Model\CustomerProvider $customerProvider
+     * @param \OlenaK\RegularCustomer\Model\ProductProvider $productProvider
      */
     public function __construct(
         DiscountRequestCollectionFactory $discountRequestCollectionFactory,
@@ -74,20 +74,20 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Magento\Backend\App\Action\Context $context,
         \Magento\Backend\Model\Auth\Session $authSession,
-        \Magento\Customer\Model\ResourceModel\CustomerRepository $customerRepository,
-        \Magento\Catalog\Model\ProductRepository $productRepository,
         \Magento\Store\Model\StoreManager $storeManager,
-        \OlenaK\RegularCustomer\Model\Email $email
+        \OlenaK\RegularCustomer\Model\Email $email,
+        \OlenaK\RegularCustomer\Model\CustomerProvider $customerProvider,
+        \OlenaK\RegularCustomer\Model\ProductProvider $productProvider
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
         $this->discountRequestCollectionFactory = $discountRequestCollectionFactory;
         $this->transactionFactory = $transactionFactory;
         $this->authSession = $authSession;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
         $this->email = $email;
+        $this->customerProvider = $customerProvider;
+        $this->productProvider = $productProvider;
     }
 
     /**
@@ -151,8 +151,8 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
 
                 //Add to arr for sending email
                 $sendEmailTo[] = [
-                    'customerEmail' => $this->getCustomerEmail($discountRequest->getEmail(), (int) $discountRequest->getCustomerId()),
-                    'productName' => $this->getProductName((int) $discountRequest->getProductId()),
+                    'customerEmail' => $this->customerProvider->getCustomerEmail($discountRequest->getEmail(), (int) $discountRequest->getCustomerId()),
+                    'productName' => $this->productProvider->getProductName((int) $discountRequest->getProductId()),
                     'storeId' => $discountRequest->getStoreId(),
                     'status' => $newStatus
                 ];
@@ -173,31 +173,5 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
             'messages' => $messages,
             'error' => $error
         ]);
-    }
-
-    /**
-     * @param int $customerId
-     */
-    private function getCustomerEmail(string $email, int $customerId = 0): string
-    {
-        $customerEmail = $email;
-        if ($customerId) {
-            $customerEmail = $this->customerRepository->getById($customerId)->getEmail();
-        }
-
-        return $customerEmail;
-    }
-
-    /**
-     * @param int $productId
-     */
-    private function getProductName(int $productId): string
-    {
-        if ($productId) {
-            $product = $this->productRepository->getById($productId);
-            $productName = ($product) ? $product->getName(): '';
-        }
-
-        return $productName;
     }
 }

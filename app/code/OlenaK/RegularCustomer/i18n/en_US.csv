@@ -1,16 +1,75 @@
+"Request deleted!","Request deleted!"
+"We can't find a request to delete.","We can't find a request to delete."
+"This request no longer exists.","This request no longer exists."
+"Edit Discount Request","Edit Discount Request"
+"New Discount Request","New Discount Request"
+"Discount Requests","Discount Requests"
+"Invalid request","Invalid request"
+"Please correct the data sent.","Please correct the data sent."
+"Request with ID %1 does not exist","Request with ID %1 does not exist"
+"%1 requests(s) have been updated.","%1 requests(s) have been updated."
+"%1 requests(s) have been deleted.","%1 requests(s) have been deleted."
+"Product with id %1 does not exist.","Product with id %1 does not exist."
+"Customer with id %1 does not exist.","Customer with id %1 does not exist."
 "You request for product %1 accepted for review!","You request for product %1 accepted for review!"
-"Your request can't be sent. Please, contact us if you see this message.","Your request can't be sent. Please, contact us if you see this message."
+No,No
+Yes,Yes
+"Are you sure you want to delete this discount request?","Are you sure you want to delete this discount request?"
+Delete,Delete
+Save,Save
+Edit,Edit
+"Are you sure you want to delete this request?","Are you sure you want to delete this request?"
+Pending,Pending
+Approved,Approved
+Declined,Declined
+"Requested product:","Requested product:"
+"Status: %1","Status: %1"
+"We couldn't find any records.","We couldn't find any records."
+"Personal Discount Request Declined","Personal Discount Request Declined"
+"Your request for the product %product_name has been <span class=""olenak-discount-request-declined"">declined</span>!","Your request for the product %product_name has been <span class=""olenak-discount-request-declined"">declined</span>!"
+"Personal Discount Request Approved","Personal Discount Request Approved"
+"Your request for the product %product_name has been <span class=""olenak-discount-request-approved"">approved</span>!","Your request for the product %product_name has been <span class=""olenak-discount-request-approved"">approved</span>!"
+"New Personal Discount Request","New Personal Discount Request"
+"Hi, %customer_name!","Hi, %customer_name!"
+"Thank you for being interested in the product %product_name.","Thank you for being interested in the product %product_name."
+"We'll notify you updated about the request status.","We'll notify you updated about the request status."
+"Request Personal Discount","Request Personal Discount"
 "Your name","Your name"
 "Your email","Your email"
 "Apply for discount","Apply for discount"
-"Requested product:","Requested product:"
+"Sign In","Sign In"
 "Your request posted","Your request posted"
-"Your request not posted","Your request not posted"
 Error,Error
+"Your request can't be sent. Please, contact us if you see this message.","Your request can't be sent. Please, contact us if you see this message."
+"Already requested!","Already requested!"
+"Please, log in to send a request!","Please, log in to send a request!"
+"Personal Discount","Personal Discount"
+"General Settings","General Settings"
+"Settings per store view are not available","Settings per store view are not available"
+Enabled,Enabled
+"Allow for Guests","Allow for Guests"
+"Allow guests to submit discount requests. Clear Page Cache and Block HTML output cache after changing this option","Allow guests to submit discount requests. Clear Page Cache and Block HTML output cache after changing this option"
+"Email Sender","Email Sender"
+Back,Back
+"Product ID","Product ID"
+"Customer ID","Customer ID"
+"Customer Name","Customer Name"
+"Customer Email","Customer Email"
+Status,Status
+"Store View","Store View"
+"Notify Customer by Email","Notify Customer by Email"
+"Email Sent","Email Sent"
+"Add New Request","Add New Request"
+"Are you sure you want to delete selected requests?","Are you sure you want to delete selected requests?"
+"Delete Requests","Delete Requests"
+"Change status","Change status"
+"Discount Request ID","Discount Request ID"
+"Product Name","Product Name"
+"User ID","User ID"
+"Email sent","Email sent"
+Created,Created
+Updated,Updated
 "Personal Discount List","Personal Discount List"
 "My Requests","My Requests"
 "Loyalty program for Regular Customers","Loyalty program for Regular Customers"
-"Already requested!","Already requested!"
-"We can't check if it has beent requested.","We can't check if it has beent requested."
-"Please, log in to send a request!","Please, log in to send a request!"
 
