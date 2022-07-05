@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OlenaK\RegularCustomer\Observer;
 
-use Magento\Framework\DataObject\Copy;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote;

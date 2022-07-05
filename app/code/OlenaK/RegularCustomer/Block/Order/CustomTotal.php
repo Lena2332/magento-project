@@ -14,7 +14,7 @@ class CustomTotal extends \Magento\Framework\View\Element\AbstractBlock
         $regularCustomer = $order->getDataByKey('regular_customer');
         $baseRegularCustomer = $order->getDataByKey('base_regular_customer');
 
-        if ($order->getCustomAmount() > 0) {
+        if ($regularCustomer) {
             $orderTotalsBlock->addTotal(new \Magento\Framework\DataObject([
                 'code' => 'regular_customer',
                 'label' => __('Regular Customer'),
@@ -23,5 +23,4 @@ class CustomTotal extends \Magento\Framework\View\Element\AbstractBlock
             ]), 'subtotal');
         }
     }
-
 }
