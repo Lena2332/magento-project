@@ -69,3 +69,5 @@ atlassian*
 !/generated/.htaccess
 /app/etc/env.php
 .DS_Store
+/.dockerizer/olena-kupriiets-magento-local.allbugs.info-dev/db.sql.gz
+

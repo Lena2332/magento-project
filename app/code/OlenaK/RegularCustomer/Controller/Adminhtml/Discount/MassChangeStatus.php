@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OlenaK\RegularCustomer\Controller\Adminhtml\Discount;
 
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use OlenaK\RegularCustomer\Model\Authorization;
 use OlenaK\RegularCustomer\Model\DiscountRequest;
 use Magento\Framework\Controller\ResultFactory;
@@ -60,22 +62,7 @@ class MassChangeStatus extends AbstractMassAction
         }
 
         //Send Emails to Customers
-        if (!empty($sendEmailTo)) {
-            foreach ($sendEmailTo as $item) {
-                $storeId = (int) $this->storeManager->getWebsite($item['storeId'])->getDefaultStore()->getId();
-
-                switch ($item['status']) {
-                    case DiscountRequest::STATUS_APPROVED:
-                        $this->email->sendRequestApprovedEmail($item['customerEmail'], $item['productName'], $storeId);
-                        break;
-                    case DiscountRequest::STATUS_DECLINED:
-                        $this->email->sendRequestDeclinedEmail($item['customerEmail'], $item['productName'], $storeId);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        $this->email->massSend($sendEmailTo);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -84,9 +71,13 @@ class MassChangeStatus extends AbstractMassAction
     }
 
     /**
+     * @param string $email
      * @param int $customerId
+     * @return string
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
-    private function getCustomerEmail (string $email, int $customerId = 0): string
+    private function getCustomerEmail(string $email, int $customerId = 0): string
     {
         $customerEmail = $email;
         if ($customerId) {
@@ -98,9 +89,13 @@ class MassChangeStatus extends AbstractMassAction
 
     /**
      * @param int $productId
+     * @return string
+     * @throws NoSuchEntityException
      */
-    private function getProductName (int $productId): string
+    private function getProductName(int $productId): string
     {
+        $productName = '';
+
         if ($productId) {
             $product = $this->productRepository->getById($productId);
             $productName = ($product) ? $product->getName(): '';

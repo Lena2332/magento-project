@@ -141,20 +141,26 @@ class Request implements
                 $email =  $this->request->getParam('email');
             }
 
-            $productId = (int) $this->request->getParam('product_id');
-            /** @var ProductCollection $productCollection */
-            $productCollection = $this->productCollectionFactory->create();
-            $productCollection->addIdFilter($productId)
-                ->setPageSize(1)
-                ->addAttributeToSelect('name');
-            $product = $productCollection->getFirstItem();
-            $productId = (int) $product->getId();
+            $productId = $this->request->getParam('product_id');
+            $productName = '';
+            if ((int) $productId !== 0) {
+                /** @var ProductCollection $productCollection */
+                $productCollection = $this->productCollectionFactory->create();
+                $productCollection->addIdFilter($productId)
+                    ->setPageSize(1)
+                    ->addAttributeToSelect('name');
+                $product = $productCollection->getFirstItem();
+                $productId = (int) $product->getId();
+                $productName = (string) $product->getName();
 
-            if (!$productId) {
-                throw new \InvalidArgumentException("Product with id $productId does not exist");
+                if (!$productId) {
+                    throw new \InvalidArgumentException("Product with id $productId does not exist");
+                }
+
+                $discountRequest->setProductId($productId);
             }
 
-            $discountRequest->setProductId($productId)
+            $discountRequest
                 ->setCustomerId($customerId)
                 ->setName($name)
                 ->setEmail($email)
@@ -170,12 +176,12 @@ class Request implements
                 $this->customerSession->setDiscountRequestProductIds(array_unique($productIds));
             }
 
-            $this->email->sendNewDiscountRequestEmail($name, $email, (string) $product->getName());
+            $this->email->sendNewDiscountRequestEmail($name, $email, $productName);
 
             return $response->setData([
                 'message' => __(
                     'You request for product %1 accepted for review!',
-                    (string) $product->getName()
+                    $productName
                 )
             ]);
         } catch (\Exception $e) {

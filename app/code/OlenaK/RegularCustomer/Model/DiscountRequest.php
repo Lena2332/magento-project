@@ -7,7 +7,7 @@ namespace OlenaK\RegularCustomer\Model;
 /**
  * @method int|string|null getRegularCustomerId()
  * @method int|string|null getProductId()
- * @method $this setProductId(int $productId)
+ * @method $this setProductId(int|null $productId)
  * @method int|string|null getCustomerId()
  * @method $this setCustomerId(int $customerId)
  * @method int|string|null getAdminUserId()
@@ -18,8 +18,6 @@ namespace OlenaK\RegularCustomer\Model;
  * @method $this setEmail(string $name)
  * @method int|string|null getStoreId()
  * @method $this setStoreId(int $websiteId)
- * @method int|null getUserId()
- * @method $this setUserId(int $userId)
  * @method int|string|null getCreatedAt()
  * @method int|string|null getUpdatedAt()
  * @method int|string getStatus()

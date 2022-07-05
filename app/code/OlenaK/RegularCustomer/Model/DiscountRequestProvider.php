@@ -54,7 +54,7 @@ class DiscountRequestProvider
         $collection->addFieldToFilter('customer_id', $customerId);
 
         //We show requests only for users registered this website and created request in this website
-        //If we want show all requests from all websites we need to use ->isGlobalScope()
+        //If we want to show all requests from all websites we need to use ->isGlobalScope()
         if ($this->shareConfig->isWebsiteScope()) {
             $collection->addFieldToFilter('store_id', ['in' => $website->getStoreIds()]);
         }

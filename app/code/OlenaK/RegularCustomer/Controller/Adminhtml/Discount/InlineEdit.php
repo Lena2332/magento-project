@@ -161,22 +161,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
             $transaction->save();
 
             //Send Emails to Customers
-            if (!empty($sendEmailTo)) {
-                foreach ($sendEmailTo as $item) {
-                    $storeId = (int) $this->storeManager->getWebsite($item['storeId'])->getDefaultStore()->getId();
-
-                    switch ($item['status']) {
-                        case DiscountRequest::STATUS_APPROVED:
-                            $this->email->sendRequestApprovedEmail($item['customerEmail'], $item['productName'], $storeId);
-                            break;
-                        case DiscountRequest::STATUS_DECLINED:
-                            $this->email->sendRequestDeclinedEmail($item['customerEmail'], $item['productName'], $storeId);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+            $this->email->massSend($sendEmailTo);
 
             $messages[] = __('%1 requests(s) have been updated.', count($items));
             $error = false;
@@ -193,7 +178,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     /**
      * @param int $customerId
      */
-    private function getCustomerEmail (string $email, int $customerId = 0): string
+    private function getCustomerEmail(string $email, int $customerId = 0): string
     {
         $customerEmail = $email;
         if ($customerId) {
@@ -206,7 +191,7 @@ class InlineEdit extends \Magento\Backend\App\Action implements \Magento\Framewo
     /**
      * @param int $productId
      */
-    private function getProductName (int $productId): string
+    private function getProductName(int $productId): string
     {
         if ($productId) {
             $product = $this->productRepository->getById($productId);

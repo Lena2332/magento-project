@@ -139,4 +139,24 @@ class Email
 
         return $emailSent;
     }
+
+    public function massSend(array $emailsTo): void
+    {
+        if (!empty($emailsTo)) {
+            foreach ($emailsTo as $item) {
+                $storeId = (int) $this->storeManager->getWebsite($item['storeId'])->getDefaultStore()->getId();
+
+                switch ($item['status']) {
+                    case DiscountRequest::STATUS_APPROVED:
+                        $this->sendRequestApprovedEmail($item['customerEmail'], $item['productName'], $storeId);
+                        break;
+                    case DiscountRequest::STATUS_DECLINED:
+                        $this->sendRequestDeclinedEmail($item['customerEmail'], $item['productName'], $storeId);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 }
