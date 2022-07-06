@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="order_totals">
-            <block class="OlenaK\RegularCustomer\Block\Order\CustomTotal" name="order.totals.custom" />
+            <block class="OlenaK\RegularCustomer\Block\Order\CustomTotal" name="regular.customer.order.email.totals" />
         </referenceBlock>
     </body>
 </page>

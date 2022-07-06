@@ -54,24 +54,24 @@ class RemoveColumnUserId implements \Magento\Framework\Setup\Patch\SchemaPatchIn
         /** @var DiscountRequest $discountRequest */
         $discountRequestCollection = $this->discountRequestCollectionFactory->create();
 
+        $adminTableName = $this->schemaSetup->getTable('admin_user');
+        $tableName = $this->schemaSetup->getTable('olenak_regular_customer_request');
+
         $collection = $discountRequestCollection->addFieldToFilter(
-            'user_id',
+            'main_table.user_id',
             ['neq' => null]
-        );
+        )->join($adminTableName, 'main_table.user_id = '.$adminTableName.'.user_id');
 
-        if ($collection->count()) {
-            /** @var DiscountRequest $item */
-            foreach ($collection as $item) {
-                $userIdData = $item->getDataByKey('user_id');
-                $item->setAdminUserId($userIdData);
-                $transaction->addObject($item);
-            }
-
-            $transaction->save();
+        /** @var DiscountRequest $item */
+        foreach ($collection as $item) {
+            $userIdData = $item->getDataByKey('user_id');
+            $item->setAdminUserId($userIdData);
+            $transaction->addObject($item);
         }
 
+        $transaction->save();
+
         $connection = $this->schemaSetup->getConnection();
-        $tableName = $this->schemaSetup->getTable('olenak_regular_customer_request');
 
         $connection->dropColumn($tableName, 'user_id');
 
