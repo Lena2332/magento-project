@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="extra_fee">
+            <title translate="true">Regular Customer</title>
+            <source_field>regular_customer</source_field>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <model>OlenaK\RegularCustomer\Model\Sales\Pdf\RegularCustomerTotal</model>
+            <sort_order>350</sort_order>
+        </total>
+    </totals>
+</config>
